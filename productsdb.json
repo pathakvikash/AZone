@@ -2,6 +2,7 @@
   "products": [
     {
       "id": 1,
+      "brand": "Philips",
       "name": "Philips Sonicare FlexCare+ Electric Toothbrush",
       "category": "Health & Personal Care",
       "price": "999",
@@ -10,54 +11,61 @@
     },
     {
       "id": 2,
+      "brand": "Apple",
       "name": "Apple MacBook Air",
       "category": "Electronics",
-      "price": "999",
+      "price": "1999",
       "description": "The MacBook Air is a lightweight laptop with long battery life and high-resolution Retina display.",
       "image_url": "https://images-na.ssl-images-amazon.com/images/I/71k3fJh5EwL._AC_SX569_.jpg"
     },
     {
       "id": 3,
+      "brand": "LG",
       "name": "LG OLED TV",
       "category": "Electronics",
-      "price": "999",
+      "price": "1999",
       "description": "This OLED TV offers stunning picture quality with deep blacks and vibrant colors.",
       "image_url": "https://m.media-amazon.com/images/I/81H5mcFf2eL._AC_UY436_FMwebp_QL65_.jpg"
     },
     {
       "id": 4,
+      "brand": "Harry",
       "name": "The Complete Harry Potter Collection Box Set",
       "category": "Books",
-      "price": "999",
+      "price": "99",
       "description": "The box set includes all seven books in the Harry Potter series, perfect for fans of all ages.",
       "image_url": "https://m.media-amazon.com/images/I/81zqe4fNdlL._AC_UY436_FMwebp_QL65_.jpg"
     },
     {
       "id": 5,
+      "brand": "Prestige",
       "name": "Instant Pot Pressure Cooker",
       "category": "Home & Kitchen",
-      "price": "999",
+      "price": "299",
       "description": "This pressure cooker can be used as a slow cooker, rice cooker, steamer, sauté, yogurt maker and warmer.",
       "image_url": "https://m.media-amazon.com/images/I/71FOIBG5f2L._AC_UL640_FMwebp_QL65_.jpg"
     },
     {
       "id": 6,
+      "brand": "Kindle",
       "name": "Kindle Paperwhite",
       "category": "Electronics",
-      "price": "999",
+      "price": "399",
       "description": "The Kindle Paperwhite is a waterproof e-reader with a high-resolution display and built-in light.",
       "image_url": "https://m.media-amazon.com/images/I/81-giPjZpSL._AC_UL640_FMwebp_QL65_.jpg"
     },
     {
       "id": 7,
+      "brand": "S&S",
       "name": "Sweet and Salty Snack Box",
       "category": "Food & Grocery",
-      "price": "999",
+      "price": "599",
       "description": "This snack box includes a variety of sweet and salty snacks, perfect for sharing or snacking on the go.",
       "image_url": "https://m.media-amazon.com/images/I/81-giPjZpSL._AC_UL640_FMwebp_QL65_.jpg"
     },
     {
       "id": 8,
+      "brand": "Ninja",
       "name": "Ninja Professional Countertop Blender",
       "category": "Home & Kitchen",
       "price": "999",
@@ -66,6 +74,7 @@
     },
     {
       "id": 9,
+      "brand": "Fitbit",
       "name": "Fitbit Charge 4 Fitness and Activity Tracker",
       "category": "Electronics",
       "price": "999",
@@ -74,6 +83,7 @@
     },
     {
       "id": 10,
+      "brand": "HP",
       "name": "HP Envy x360 Laptop",
       "category": "Electronics",
       "price": "999",
@@ -82,6 +92,7 @@
     },
     {
       "id": 11,
+      "brand": "Dell",
       "name": "Dell XPS 13 Laptop",
       "category": "Electronics",
       "price": "999",
@@ -90,6 +101,7 @@
     },
     {
       "id": 12,
+      "brand": "Oculus",
       "name": "Oculus Rift S VR Glasses",
       "category": "Electronics",
       "price": "999",
