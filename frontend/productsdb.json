@@ -1,0 +1,119 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Philips Sonicare FlexCare+ Electric Toothbrush",
+      "category": "Health & Personal Care",
+      "price": "999",
+      "description": "This electric toothbrush is designed to improve gum health and provides superior cleaning.",
+      "image_url": "https://m.media-amazon.com/images/I/61e-yIP-+yL._AC_UL640_FMwebp_QL65_.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Apple MacBook Air",
+      "category": "Electronics",
+      "price": "999",
+      "description": "The MacBook Air is a lightweight laptop with long battery life and high-resolution Retina display.",
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/71k3fJh5EwL._AC_SX569_.jpg"
+    },
+    {
+      "id": 3,
+      "name": "LG OLED TV",
+      "category": "Electronics",
+      "price": "999",
+      "description": "This OLED TV offers stunning picture quality with deep blacks and vibrant colors.",
+      "image_url": "https://m.media-amazon.com/images/I/81H5mcFf2eL._AC_UY436_FMwebp_QL65_.jpg"
+    },
+    {
+      "id": 4,
+      "name": "The Complete Harry Potter Collection Box Set",
+      "category": "Books",
+      "price": "999",
+      "description": "The box set includes all seven books in the Harry Potter series, perfect for fans of all ages.",
+      "image_url": "https://m.media-amazon.com/images/I/81zqe4fNdlL._AC_UY436_FMwebp_QL65_.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Instant Pot Pressure Cooker",
+      "category": "Home & Kitchen",
+      "price": "999",
+      "description": "This pressure cooker can be used as a slow cooker, rice cooker, steamer, sauté, yogurt maker and warmer.",
+      "image_url": "https://m.media-amazon.com/images/I/71FOIBG5f2L._AC_UL640_FMwebp_QL65_.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Kindle Paperwhite",
+      "category": "Electronics",
+      "price": "999",
+      "description": "The Kindle Paperwhite is a waterproof e-reader with a high-resolution display and built-in light.",
+      "image_url": "https://m.media-amazon.com/images/I/81-giPjZpSL._AC_UL640_FMwebp_QL65_.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Sweet and Salty Snack Box",
+      "category": "Food & Grocery",
+      "price": "999",
+      "description": "This snack box includes a variety of sweet and salty snacks, perfect for sharing or snacking on the go.",
+      "image_url": "https://m.media-amazon.com/images/I/81-giPjZpSL._AC_UL640_FMwebp_QL65_.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Ninja Professional Countertop Blender",
+      "category": "Home & Kitchen",
+      "price": "999",
+      "description": "This powerful blender can be used to make smoothies, sauces, and other blended drinks.",
+      "image_url": "https://m.media-amazon.com/images/I/51QiGDcNQnL._AC_UY436_FMwebp_QL65_.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Fitbit Charge 4 Fitness and Activity Tracker",
+      "category": "Electronics",
+      "price": "999",
+      "description": "The Fitbit Charge 4 tracks daily activity and provides insights into sleep and fitness goals.",
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/71smqRr0pmL._AC_SX569_.jpg"
+    },
+    {
+      "id": 10,
+      "name": "HP Envy x360 Laptop",
+      "category": "Electronics",
+      "price": "999",
+      "description": "The HP Envy x360 is a versatile 2-in-1 laptop with a powerful AMD processor.",
+      "image_url": "https://m.media-amazon.com/images/I/61t0Of1jvRL._AC_UY436_FMwebp_QL65_.jpg"
+    },
+    {
+      "id": 11,
+      "name": "Dell XPS 13 Laptop",
+      "category": "Electronics",
+      "price": "999",
+      "description": "The Dell XPS 13 is a high-performance laptop with a stunning InfinityEdge display.",
+      "image_url": "https://m.media-amazon.com/images/I/61rvR2b3flL._AC_UY436_FMwebp_QL65_.jpg"
+    },
+    {
+      "id": 12,
+      "name": "Oculus Rift S VR Glasses",
+      "category": "Electronics",
+      "price": "999",
+      "description": "Experience immersive VR gaming with the Oculus Rift S VR Glasses.",
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/71URNvzoWqL._AC_SX679_.jpg"
+    }
+  ],
+  "deals": [
+    {
+      "id": 1,
+      "name": "Samsung Galaxy Buds Live Bluetooth Truly Wireless in Ear Earbuds with Mic, Upto 21 Hours Playtime, Mystic Black",
+      "price": 15990,
+      "deal_price": 4790,
+      "image_url": "https://m.media-amazon.com/images/I/31Tm22hUx1L._AC_UF420%2C420_FMjpg_.jpg",
+      "deal": "70% off",
+      "colors": [
+        "Black",
+        "Brown",
+        "Blue"
+      ],
+      "brand": "Samsung",
+      "model": "Galaxy Bean_Buds Live",
+      "colour": "Mystic Black",
+      "rating": 7848
+    }
+  ]
+}
