@@ -3,12 +3,25 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const Product = require('./models/product');
+const productJson = require('../productsdb.json');
 
 // Connect to the MongoDB database
-mongoose.connect('mongodb://localhost/test', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose
+  .connect('mongodb://localhost/test', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(async () => {
+    console.log('Successfully connected to the database');
+
+    // Seed the database with the products
+    const currentProductCount = await Product.count();
+    if (currentProductCount == 0) {
+      await Product.insertMany(productJson.products);
+      console.log('Successfully seeded the database with products');
+    }
+  });
 
 app.use(cors());
 app.use(bodyParser.json());
