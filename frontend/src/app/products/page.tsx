@@ -1,6 +1,12 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import ProductList from '@/components/product';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  setFilteredProducts,
+  setProductsData,
+} from '@/store/slices/productSlice';
 
 export default function PostPage() {
   return (
@@ -14,40 +20,121 @@ export default function PostPage() {
 const FilterSidebar = () => {
   const brands = ['Nike', 'Adidas', 'Puma', 'Reebok'];
   const prices = ['1000', '5000', '10000', '20000'];
+
   return (
     <div className='p-4 w-[600px] bg-white shadow'>
       <h2 className='text-lg text-black font-semibold'>Filters</h2>
       <hr className='my-4' />
-      <FilterComponent title='Brands' item={brands} />
+      <BrandsFilter />
       <hr className='my-4' />
-      <FilterComponent title='Price' item={prices} />
+      <PriceFilter prices={prices} />
       <hr className='my-4' />
       <Review />
     </div>
   );
 };
 
-const FilterComponent = ({ title, item }: any) => {
-  const showCheckbox = title === 'Brands';
+const BrandsFilter = () => {
+  const [brandFilters, setBrandFilters] = useState<string[]>([]);
+  const productsData = useSelector((state: any) => state.products.productsData);
+  const filteredBrands = productsData.map((product: any) => product.brand);
+  const dispatch = useDispatch();
+  const handleBrandLabelClick = (brand: string) => {
+    const brandsToFilter = brandFilters.includes(brand)
+      ? brandFilters.filter((item) => item != brand)
+      : [...brandFilters, brand];
+    setBrandFilters(brandsToFilter);
+    const filterItem =
+      brandsToFilter.length == 0
+        ? productsData
+        : productsData.filter((item: any) =>
+            brandsToFilter.includes(item.brand)
+          );
+    dispatch(setFilteredProducts(filterItem));
+  };
+  return (
+    <FilterComponent
+      title='Brands'
+      items={filteredBrands}
+      showCheckbox={true}
+      onLabelClick={handleBrandLabelClick}
+      selected={brandFilters}
+    />
+  );
+};
 
+const PriceFilter = ({ prices }: any) => {
+  const productsData = useSelector((state: any) => state.products.productsData);
+  function handlePrice(price: any) {
+    const filteredbyPrice = productsData.filter(
+      (item: any) => item.price == price
+    );
+  }
+  return (
+    <FilterComponent
+      title='Price'
+      items={prices}
+      showCheckbox={false}
+      onLabelClick={handlePrice}
+    />
+  );
+};
+
+const FilterComponent = ({
+  title,
+  items,
+  showCheckbox,
+  onLabelClick,
+  selected,
+}: {
+  title: string;
+  items: string[];
+  showCheckbox: boolean;
+  onLabelClick?: (label: string) => void;
+  selected?: string[];
+}) => {
   return (
     <div className='text-black'>
       <h3 className='text-lg text-black font-semibold'>{title}</h3>
-      {/* <hr className='my-2' /> */}
       <div className='flex flex-col flex-wrap'>
-        {item.map((item: any) => (
-          <FilterItem key={item} item={item} showCheckbox={showCheckbox} />
+        {items.map((item: any) => (
+          <FilterItem
+            key={item}
+            label={item}
+            showCheckbox={showCheckbox}
+            onLabelClick={onLabelClick}
+            selected={selected}
+          />
         ))}
       </div>
     </div>
   );
 };
 
-const FilterItem = ({ item, showCheckbox }: any) => {
+const FilterItem = ({
+  label,
+  showCheckbox,
+  onLabelClick,
+  selected,
+}: {
+  label: string;
+  showCheckbox: boolean;
+  onLabelClick?: (label: string) => void;
+  selected?: string[];
+}) => {
   return (
-    <div className='flex items-center'>
-      {showCheckbox && <input type='checkbox' className='mr-2' />}
-      <span>{item}</span>
+    <div
+      className='flex items-center'
+      onClick={() => onLabelClick && onLabelClick(label)}
+    >
+      {showCheckbox && (
+        <input
+          type='checkbox'
+          className='mr-2'
+          checked={selected?.includes(label)}
+        />
+      )}
+      <span>{label}</span>
     </div>
   );
 };

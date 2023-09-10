@@ -1,6 +1,9 @@
 'use client';
 import { useDispatch } from 'react-redux';
-import { setProductsData } from '@/store/slices/productSlice';
+import {
+  setProductsData,
+  setFilteredProducts,
+} from '@/store/slices/productSlice';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { baseUrl } from '@/constant';
@@ -24,7 +27,9 @@ const Product = ({ product }: any) => {
 
 const ProductList = () => {
   const dispatch = useDispatch();
-  const productsData = useSelector((state: any) => state.products.productsData);
+  const filterProducts = useSelector(
+    (state: any) => state.products.filteredProducts
+  );
 
   const fetchProducts = async () => {
     try {
@@ -32,7 +37,7 @@ const ProductList = () => {
       if (response.ok) {
         const productsData = await response.json();
         dispatch(setProductsData(productsData));
-        setProductsData(productsData);
+        dispatch(setFilteredProducts(productsData));
       } else {
         console.error('Error fetching product data');
       }
@@ -47,7 +52,7 @@ const ProductList = () => {
 
   return (
     <div className='flex flex-wrap justify-center'>
-      {productsData?.map((product: any) => (
+      {filterProducts?.map((product: any) => (
         <div key={product.id} className='flex w-[350px] '>
           <Product product={product} />
         </div>

@@ -16,9 +16,13 @@ const productSlice = createSlice({
     setSearchQuery: (state, action) => {
       state.searchQuery = action.payload;
     },
+    setFilteredProducts: (state, action) => {
+      state.filteredProducts = action.payload;
+    },
   },
 });
 
-export const { setProductsData, setSearchQuery } = productSlice.actions;
+export const { setProductsData, setSearchQuery, setFilteredProducts } =
+  productSlice.actions;
 
 export default productSlice.reducer;
