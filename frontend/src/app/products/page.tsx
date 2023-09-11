@@ -18,7 +18,6 @@ export default function PostPage() {
 }
 
 const FilterSidebar = () => {
-  const brands = ['Nike', 'Adidas', 'Puma', 'Reebok'];
   const prices = ['1000', '5000', '10000', '20000'];
 
   return (
@@ -52,89 +51,74 @@ const BrandsFilter = () => {
           );
     dispatch(setFilteredProducts(filterItem));
   };
+  const brandItems = filteredBrands.map((brand: string) => (
+    <label className='text-black flex gap-2' key={brand}>
+      <input
+        type='checkbox'
+        value={brand}
+        checked={brandFilters.includes(brand)}
+        onChange={() => handleBrandLabelClick(brand)}
+      />
+      {brand}
+    </label>
+  ));
   return (
-    <FilterComponent
-      title='Brands'
-      items={filteredBrands}
-      showCheckbox={true}
-      onLabelClick={handleBrandLabelClick}
-      selected={brandFilters}
-    />
-  );
-};
-
-const PriceFilter = ({ prices }: any) => {
-  const productsData = useSelector((state: any) => state.products.productsData);
-  function handlePrice(price: any) {
-    const filteredbyPrice = productsData.filter(
-      (item: any) => item.price == price
-    );
-  }
-  return (
-    <FilterComponent
-      title='Price'
-      items={prices}
-      showCheckbox={false}
-      onLabelClick={handlePrice}
-    />
-  );
-};
-
-const FilterComponent = ({
-  title,
-  items,
-  showCheckbox,
-  onLabelClick,
-  selected,
-}: {
-  title: string;
-  items: string[];
-  showCheckbox: boolean;
-  onLabelClick?: (label: string) => void;
-  selected?: string[];
-}) => {
-  return (
-    <div className='text-black'>
-      <h3 className='text-lg text-black font-semibold'>{title}</h3>
-      <div className='flex flex-col flex-wrap'>
-        {items.map((item: any) => (
-          <FilterItem
-            key={item}
-            label={item}
-            showCheckbox={showCheckbox}
-            onLabelClick={onLabelClick}
-            selected={selected}
-          />
-        ))}
-      </div>
+    <div>
+      <h3 className='text-lg text-black font-semibold'>Brands</h3>
+      {brandItems}
     </div>
   );
 };
 
-const FilterItem = ({
-  label,
-  showCheckbox,
-  onLabelClick,
-  selected,
-}: {
-  label: string;
-  showCheckbox: boolean;
-  onLabelClick?: (label: string) => void;
-  selected?: string[];
-}) => {
+const PriceFilter = ({ prices }: any) => {
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+  const productsData = useSelector((state: any) => state.products.productsData);
+  const dispatch = useDispatch();
+
+  const handlePrice = (price: any) => {
+    const filteredByPrice = productsData.filter(
+      (item: any) => item.price <= price
+    );
+    dispatch(setFilteredProducts(filteredByPrice));
+  };
+
+  const handleFilter = () => {
+    const filteredByMinMax = productsData.filter(
+      (item: any) => item.price >= minPrice && item.price <= maxPrice
+    );
+    dispatch(setFilteredProducts(filteredByMinMax));
+  };
+
   return (
-    <div
-      className='flex items-center'
-      onClick={() => onLabelClick && onLabelClick(label)}
-    >
-      {showCheckbox && (
+    <div className='text-black'>
+      <h3 className='text-lg text-black font-semibold'>Price</h3>
+      <div className='flex items-start flex-col '>
+        {prices.map((price: any, index: number) => (
+          <button key={price} onClick={() => handlePrice(price)}>
+            <span className=''>{` ${
+              index === 0 ? 'Under' : index === prices.length - 1 ? 'Over' : ''
+            } ₹ ${price}`}</span>
+          </button>
+        ))}
+      </div>
+      <div className='custom flex'>
         <input
-          type='checkbox'
-          className='mr-2'
-          checked={selected?.includes(label)}
+          className='w-[50%] mr-2'
+          type='text'
+          placeholder='₹ min'
+          value={minPrice}
+          onChange={(e) => setMinPrice(e.target.value)}
         />
-      )}
-      <span>{label}</span>
+        <input
+          type='text'
+          placeholder='₹ max'
+          className='w-[50%] mr-2'
+          value={maxPrice}
+          onChange={(e) => setMaxPrice(e.target.value)}
+        />
+        <button onClick={handleFilter}>Go</button>
+      </div>
     </div>
   );
 };
