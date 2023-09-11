@@ -1,4 +1,5 @@
 'use client';
+import { useSelector, useDispatch } from 'react-redux';
 import { baseUrl } from '@/constant';
 import React, { useState } from 'react';
 import {
@@ -13,6 +14,7 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { useAppData } from '@/hooks/useAppData';
 import axios from 'axios';
 import Link from 'next/link';
+import { setFilteredProducts } from '@/store/slices/productSlice';
 
 interface SearchState {
   searchCategory: string;
@@ -21,20 +23,16 @@ interface SearchState {
 
 const Navbar = () => {
   const [darkMode, setDarkMode] = useState(false);
-  const { filterProducts } = useAppData();
   const [showDeliveryOptions, setShowDeliveryOptions] = useState(false);
   const [showLanguageOptions, setShowLanguageOptions] = useState(false);
   const [searchState, setSearchState] = useState<SearchState>({
     searchCategory: '',
     searchText: '',
   });
+  const dispatch = useDispatch();
 
-  async function filterByCategory(category: string) {
-    const response = await fetch(`${baseUrl}/products/category/${category}`);
-    const data = await response.json();
+  const Allproducts = useSelector((state: any) => state.products.productsData);
 
-    return data;
-  }
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
@@ -54,8 +52,8 @@ const Navbar = () => {
       ...prevState,
       searchCategory: selectedCategory,
     }));
-    filterByCategory(selectedCategory);
   };
+
   const handleSearchTextChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -63,16 +61,15 @@ const Navbar = () => {
       ...searchState,
       searchText: event.target.value,
     });
+    handleSearch();
   };
 
   const handleSearch = () => {
-    console.log(
-      'Searching for:',
-      searchState.searchCategory,
-      searchState.searchText
+    const filterBySearch = Allproducts.filter((product: any) =>
+      product.name.toLowerCase().includes(searchState.searchText.toLowerCase())
     );
-    filterProducts(searchState.searchCategory);
-    console.log(filterProducts, 'filter products');
+
+    dispatch(setFilteredProducts(filterBySearch));
   };
 
   return (
@@ -151,6 +148,12 @@ const Navbar = () => {
             >
               Language
             </button>
+            <a
+              href='/products'
+              className='text-gray-600 dark:text-gray-400 ml-4'
+            >
+              Products
+            </a>
             {showLanguageOptions && (
               <div>
                 <button className='text-gray-600 dark:text-gray-400 ml-4'>
@@ -179,9 +182,12 @@ const Navbar = () => {
     </div>
   );
 };
-
 const HMenu = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const Allproducts = useSelector((state: any) => state.products.productsData);
+  const allCategories = Allproducts.map((product: any) => product.category);
+  const uniqueCategories = new Set(allCategories);
+  let filteredCategories = Array.from(uniqueCategories);
 
   const toggleSidebar = () => {
     console.log(isSidebarOpen, 'isSidebarOpen');
@@ -199,18 +205,13 @@ const HMenu = () => {
           <div className='text-white text-xl'>H Menu</div>
         </button>
         <div className='hidden md:block'>
-          <a href='/products' className='text-white mr-4'>
-            Phones
-          </a>
-          <a href='/' className='text-white mr-4'>
-            Home
-          </a>
-          <a href='/products' className='text-white mr-4'>
-            Products
-          </a>
-          <a href='#' className='text-white'>
-            Contact
-          </a>
+          {filteredCategories.map((category: any) => {
+            return (
+              <button key={category} className='text-white gap-3 mr-4'>
+                {category}
+              </button>
+            );
+          })}
         </div>
       </div>
       {isSidebarOpen && <Sidebar toggleSidebar={toggleSidebar} />}
