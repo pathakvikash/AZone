@@ -29,6 +29,13 @@ const FilterSidebar = () => {
       <PriceFilter prices={prices} />
       <hr className='my-4' />
       <Review />
+      <>
+        <p className='font-semibold text-lg mt-4 text-black'>Availability</p>
+        <span className='text-black flex gap-2'>
+          <input type='checkbox' />
+          Include Out of Stock
+        </span>
+      </>
     </div>
   );
 };
@@ -73,7 +80,9 @@ const BrandsFilter = () => {
 const PriceFilter = ({ prices }: any) => {
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
-  const productsData = useSelector((state: any) => state.products.productsData);
+  const productsData = useSelector(
+    (state: any) => state.products.filteredProducts
+  );
   const dispatch = useDispatch();
 
   const handlePrice = (price: any) => {
