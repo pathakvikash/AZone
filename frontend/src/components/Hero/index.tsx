@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+
 const Hero = () => {
   const [slideIndex, setSlideIndex] = useState(0);
 
@@ -36,18 +37,18 @@ const Hero = () => {
             Shop Now
           </button>
         </div>
-        <div className='absolute bottom-4 left-4 right-4 flex justify-between'>
+        <div className='absolute top-[300px] left-4 right-4 flex justify-between'>
           <button
             onClick={() => handleSlide('prev')}
             className='slider-button prev-button text-white bg-gray-500 hover:bg-gray-400 py-2 px-4 rounded-lg cursor-pointer transition duration-300 ease-in-out'
           >
-            Prev
+            {'<'}
           </button>
           <button
             onClick={() => handleSlide('next')}
             className='slider-button next-button text-white bg-gray-500 hover:bg-gray-400 py-2 px-4 rounded-lg cursor-pointer transition duration-300 ease-in-out'
           >
-            Next
+            {'>'}
           </button>
         </div>
       </div>
