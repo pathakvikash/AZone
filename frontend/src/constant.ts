@@ -77,4 +77,59 @@ const Deals = [
   },
 ];
 
-export { baseUrl, logo, Deals };
+const homeDecorImg = [
+  {
+    url: 'https://images-eu.ssl-images-amazon.com/images/G/31/IMG20/Home/2023/BAU2023/BTFGW/Home_Decor_-_PCQC_-_Resized._SY232_CB595940621_.jpg',
+    text: 'Home Decor',
+  },
+  {
+    url: 'https://images-eu.ssl-images-amazon.com/images/G/31/IMG20/Home/2023/BAU2023/BTFGW/HF_-_PCQC_-_Resized._SY232_CB595940621_.jpg',
+    text: 'Home Furnishing',
+  },
+  {
+    url: 'https://images-eu.ssl-images-amazon.com/images/G/31/IMG20/Home/2023/BAU2023/BTFGW/HS_-_PCQC_-_Resized._SY232_CB595940621_.jpg',
+    text: 'Home Storage',
+  },
+  {
+    url: 'https://images-eu.ssl-images-amazon.com/images/G/31/IMG20/Home/2023/BAU2023/BTFGW/IL_-_PCQC_-_Resized._SY232_CB595940621_.jpg',
+    text: 'Lighting Solutions',
+  },
+];
+const homeCleanerImg = [
+  {
+    url: 'https://images-eu.ssl-images-amazon.com/images/G/31/img23/HI/SYED/ATF/QC-adapts_376x232_4._SY232_CB600489960_.jpg',
+    text: 'Spin mops, wipes & more',
+  },
+  {
+    url: 'https://images-eu.ssl-images-amazon.com/images/G/31/img23/HI/SYED/ATF/QC-adapts_376x232_3._SY232_CB600489960_.jpg',
+    text: 'Bathroom hardware & accessories',
+  },
+  {
+    url: 'https://images-eu.ssl-images-amazon.com/images/G/31/img23/HI/SYED/ATF/QC-adapts_376x232_7._SY232_CB600489960_.jpg',
+    text: 'Hammers, screwdrivers & more',
+  },
+  {
+    url: 'https://images-eu.ssl-images-amazon.com/images/G/31/img23/HI/SYED/ATF/QC-adapts_376x232_5._SY232_CB600489960_.jpg',
+    text: 'Extension boards, plugs & more',
+  },
+];
+const mesStyle = [
+  {
+    url: 'https://images-eu.ssl-images-amazon.com/images/G/31/img22/Fashion/Gateway/BAU/BTF-Refresh/May/PF_MF/MF-1-372-232._SY232_CB636110853_.jpg',
+    text: 'Clothing ',
+  },
+  {
+    url: 'https://images-eu.ssl-images-amazon.com/images/G/31/img22/Fashion/Gateway/BAU/BTF-Refresh/May/PF_MF/MF-2-372-232._SY232_CB636110853_.jpg',
+    text: 'Footwear',
+  },
+  {
+    url: 'https://images-eu.ssl-images-amazon.com/images/G/31/img22/Fashion/Gateway/BAU/BTF-Refresh/May/PF_MF/MF-3-372-232._SY232_CB636110853_.jpg',
+    text: 'Watches',
+  },
+  {
+    url: 'https://images-eu.ssl-images-amazon.com/images/G/31/img22/Fashion/Gateway/BAU/BTF-Refresh/May/PF_MF/MF_4-372-232._SY232_CB636110853_.jpg',
+    text: 'Bag & Wallet',
+  },
+];
+
+export { baseUrl, logo, Deals, homeDecorImg, homeCleanerImg, mesStyle };

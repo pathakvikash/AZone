@@ -195,7 +195,7 @@ const HMenu = () => {
   };
 
   return (
-    <nav className='bg-gray-700 p-4 text-white'>
+    <nav className='bg-gray-800 p-1 text-white'>
       <div className='flex items-center justify-between'>
         <button
           className='text-white text-2xl flex gap-2 items-center cursor-pointer'

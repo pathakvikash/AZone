@@ -21,7 +21,7 @@ const FilterSidebar = () => {
   const prices = ['1000', '5000', '10000', '20000'];
 
   return (
-    <div className='p-4 w-[600px] bg-white shadow'>
+    <div className='p-4 max-w-[500px] bg-white shadow'>
       <h2 className='text-lg text-black font-semibold'>Filters</h2>
       <hr className='my-4' />
       <BrandsFilter />
@@ -111,7 +111,7 @@ const PriceFilter = ({ prices }: any) => {
           </button>
         ))}
       </div>
-      <div className='custom flex'>
+      <div className='custom flex '>
         <input
           className='w-[50%] mr-2'
           type='text'
