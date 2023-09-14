@@ -53,6 +53,7 @@ const ProductDetail: React.FC = () => {
           className='w-full h-auto'
         />
       </div>
+
       <div className='w-1/2 p-4'>
         <h1 className='text-2xl text-black font-bold'>{product.name}</h1>
         <p className='text-blue-900 hover:bg-blue-100'>
@@ -75,6 +76,7 @@ const ProductDetail: React.FC = () => {
         </div>
         <hr className='my-4 bg-slate-800' />
       </div>
+      <ProductSideDetails />
     </div>
   );
 };
@@ -137,3 +139,52 @@ const HoverReview = () => {
     </div>
   );
 };
+
+function ProductSideDetails() {
+  return (
+    <div className='w-1/4 p-6 border border-gray-300 text-black shadow-md'>
+      <div className='flex items-center gap-3'>
+        <p className='text-2xl font-semibold font-sans'>₹1,299</p>
+      </div>
+      <p className='text-[#007185]'>
+        FREE delivery{' '}
+        <span className='font-semibold'>Friday, 15 September</span>.{' '}
+        <span className='text-[#007185] underline cursor-pointer'>Details</span>
+      </p>
+      <p>
+        Or faster delivery{' '}
+        <span className='font-semibold'>Tomorrow 14 September</span>. Order
+        within <span>4 hrs 11 min.</span>{' '}
+        <span className='text-[#007185] underline cursor-pointer'>Details</span>
+      </p>
+      <div className='flex items-center gap-2'>
+        <i className='fa fa-map-marker text-gray-500'></i>
+        <p className='text-[#007185] underline cursor-pointer'>
+          Select delivery location
+        </p>
+      </div>
+      <p className='text-lg text-green-500'>In stock</p>
+      <p>
+        Sold by{' '}
+        <span className='text-[#007185]'>Appario Retailer Private Ltd</span> and{' '}
+        <span className='text-[#007185]'>Fulfilled by Amazon</span>
+      </p>
+      <p>Quantity: 1</p>
+      <button className='bg-yellow-300 rounded-lg w-full py-2 mt-4 cursor-pointer'>
+        Add to Cart
+      </button>
+      <button className='bg-orange-300 rounded-lg w-full py-2 mt-2 cursor-pointer'>
+        Buy Now
+      </button>
+      <div className='flex items-center gap-3 mt-2'>
+        <i className='fa fa-lock text-gray-500'></i>
+        <p className='text-[#007185]'>Secure transaction</p>
+      </div>
+      <p>Add gift option</p>
+      <hr className='my-2 border border-gray-300' />
+      <button className='bg-gray-100 rounded-lg w-full py-2 cursor-pointer'>
+        Add to Wish List
+      </button>
+    </div>
+  );
+}
