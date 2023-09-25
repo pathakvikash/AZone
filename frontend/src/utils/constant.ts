@@ -1,6 +1,10 @@
-import logo from '../public/logo.png';
+import logo from '../../public/logo.png';
 
-const baseUrl = 'http://localhost:3001';
+const BASE_URL = 'http://localhost:3001';
+const GB_CURRENCY = Intl.NumberFormat('en-GB', {
+  style: 'currency',
+  currency: 'GBP',
+});
 
 const Deals = [
   {
@@ -132,4 +136,12 @@ const mesStyle = [
   },
 ];
 
-export { baseUrl, logo, Deals, homeDecorImg, homeCleanerImg, mesStyle };
+export {
+  BASE_URL,
+  GB_CURRENCY,
+  logo,
+  Deals,
+  homeDecorImg,
+  homeCleanerImg,
+  mesStyle,
+};

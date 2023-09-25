@@ -1,187 +1,77 @@
 'use client';
+import Search from './Search';
+import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 import { useSelector, useDispatch } from 'react-redux';
-import { baseUrl } from '@/constant';
+import { BASE_URL } from '@/utils/constant';
 import React, { useState } from 'react';
-import {
-  FaUser,
-  FaArrowRight,
-  FaArrowLeft,
-  FaSearch,
-  FaLocationArrow,
-  FaShoppingCart,
-} from 'react-icons/fa';
-import { AiOutlineSearch } from 'react-icons/ai';
-import { useAppData } from '@/hooks/useAppData';
-import axios from 'axios';
+import { FaUser, FaArrowRight, FaArrowLeft } from 'react-icons/fa';
 import Link from 'next/link';
-import { setFilteredProducts } from '@/store/slices/productSlice';
-
-interface SearchState {
-  searchCategory: string;
-  searchText: string;
-}
-
+import amazon from '../../public/amazon.png';
 const Navbar = () => {
-  const [darkMode, setDarkMode] = useState(false);
-  const [showDeliveryOptions, setShowDeliveryOptions] = useState(false);
-  const [showLanguageOptions, setShowLanguageOptions] = useState(false);
-  const [searchState, setSearchState] = useState<SearchState>({
-    searchCategory: '',
-    searchText: '',
-  });
-  const dispatch = useDispatch();
-
-  const Allproducts = useSelector((state: any) => state.products.productsData);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
-
-  const toggleOptions = (
-    state: boolean,
-    setState: (state: boolean) => void
-  ) => {
-    setState(!state);
-  };
-
-  const handleSearchCategoryChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const selectedCategory = event.target.value;
-    setSearchState((prevState) => ({
-      ...prevState,
-      searchCategory: selectedCategory,
-    }));
-  };
-
-  const handleSearchTextChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setSearchState({
-      ...searchState,
-      searchText: event.target.value,
-    });
-    handleSearch();
-  };
-
-  const handleSearch = () => {
-    const filterBySearch = Allproducts.filter((product: any) =>
-      product.name.toLowerCase().includes(searchState.searchText.toLowerCase())
-    );
-
-    dispatch(setFilteredProducts(filterBySearch));
-  };
-
+  const cart = useSelector((state: any) => state.cart.productsNumber);
   return (
     <div>
-      <nav
-        className={`z-10 w-full items-center justify-between font-mono text-sm lg:flex ${
-          darkMode ? 'dark' : ''
-        }`}
-      >
-        <div className='flex items-center justify-between w-full p-4 bg-white dark:bg-gray-900'>
-          <div className='flex gap-3'>
-            <Link href='/'>
+      <header className='min-w-[1000px]'>
+        <div className='flex bg-amazonclone text-white h-[60px]'>
+          {/* Left */}
+          <div className='flex items-center m-4'>
+            <Link href={'/'}>
               <img
-                src={'/logo.png'}
-                alt=''
-                className='w-9 h-9 rounded-3xl border-2 border-gray-400'
+                className='h-[35px] w-[100px] m-2'
+                src={`${amazon.src}`}
+                alt='Amazon logo'
               />
             </Link>
-            <button
-              className='text-gray-600 flex items-center gap-3 dark:text-gray-400 mr-4'
-              onClick={() =>
-                toggleOptions(showDeliveryOptions, setShowDeliveryOptions)
-              }
-            >
-              <FaLocationArrow />
-              Delivery
-            </button>
-            {showDeliveryOptions && (
-              <div>
-                <input
-                  type='text'
-                  placeholder='Enter Address or Zip Code'
-                  className='px-2 py-1 rounded-md text-gray-600 dark:text-gray-400'
-                />
-                <button className='bg-blue-500 text-white px-2 py-1 rounded-md ml-2'>
-                  Confirm
-                </button>
+            <div className='pr-4 pl-4'>
+              <div className='text-xs xl:text-sm'>Deliver to</div>
+              <div className='text-sm xl:text-base font-bold'>
+                United Kingdom
               </div>
-            )}
-          </div>
-          <div className='relative flex items-center'>
-            <div className='flex bg-white rounded-md'>
-              <select
-                className='px-2 py-1 w-full sm:w-min rounded-md text-gray-600 dark:text-gray-400'
-                onChange={(event) => handleSearchCategoryChange(event)}
-                value={searchState.searchCategory || 'All'}
-              >
-                <option value=''>All</option>
-                <option value='electronics'>Electronics</option>
-                <option value='clothing'>Clothing</option>
-                <option value='books'>Books</option>
-              </select>
-
-              <input
-                type='text'
-                placeholder='Search for something'
-                className='px-2 py-1 w-min sm:w-max text-gray-600 dark:text-gray-400 ml-2'
-                value={searchState.searchText}
-                onChange={handleSearchTextChange}
-              />
-              <button
-                className='focus:outline-none hover:focus:border-[#ff9900] outline-none border-[3px] rounded-md bg-[#ff9900] border-[#ff9900] rounded-l-xy py-2 px-4 p-3'
-                onClick={handleSearch}
-              >
-                <AiOutlineSearch className='text-gray-600 text-xl dark:text-gray-200' />
-              </button>
             </div>
           </div>
-
-          <div className='flex items-center'>
-            <button
-              className='text-gray-600 dark:text-gray-400 ml-4'
-              onClick={() =>
-                toggleOptions(showLanguageOptions, setShowLanguageOptions)
-              }
-            >
-              Language
-            </button>
-            <a
-              href='/products'
-              className='text-gray-600 dark:text-gray-400 ml-4'
-            >
-              Products
-            </a>
-            {showLanguageOptions && (
-              <div>
-                <button className='text-gray-600 dark:text-gray-400 ml-4'>
-                  English
-                </button>
-                <button className='text-gray-600 dark:text-gray-400 ml-4'>
-                  Spanish
-                </button>
+          {/* Middle */}
+          <div className='flex grow relative items-center'>
+            <Search />
+          </div>
+          {/* Right */}
+          <div className='flex items-center m-4'>
+            <div className='pr-4 pl-4'>
+              <div className='text-xs xl:text-sm'>Hello, sign in</div>
+              <div className='text-sm xl:text-base font-bold'>
+                Accounts & Lists
               </div>
-            )}
-            <button className='text-gray-600 dark:text-gray-400 ml-4'>
-              Order
-            </button>
-            <Link href='/cart'>
-              <button className='text-gray-600 dark:text-gray-400 ml-4'>
-                <FaShoppingCart />
-                <span className='absolute w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center'>
-                  0
-                </span>
-              </button>
+            </div>
+            <div className='pr-4 pl-4'>
+              <div className='text-xs xl:text-sm'>Returns</div>
+              <div className='text-sm xl:text-base font-bold'>& Orders</div>
+            </div>
+            <div className='pr-4 pl-4'>
+              <div className='text-xs xl:text-sm'>Filter</div>
+              <div className='text-sm xl:text-base font-bold'>
+                <a href='products'>Products</a>
+              </div>
+            </div>
+            <Link href={'/checkout'}>
+              <div className='flex pr-3 pl-3'>
+                <ShoppingCartIcon className='h-[48px]' />
+                <div className='relative'>
+                  <div className='absolute right-[9px] font-bold m-2 text-orange-400'>
+                    {cart}
+                  </div>
+                </div>
+                <div className='mt-7 text-xs xl:text-sm font-bold'>Cart</div>
+              </div>
             </Link>
           </div>
         </div>
-      </nav>
-      <HMenu />
+        <div className='flex bg-amazonclone-light_blue text-white space-x-3 text-xs xl:text-sm p-2 pl-6'>
+          <HMenu />
+        </div>
+      </header>
     </div>
   );
 };
+
 const HMenu = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const Allproducts = useSelector((state: any) => state.products.productsData);
@@ -195,14 +85,13 @@ const HMenu = () => {
   };
 
   return (
-    <nav className='bg-gray-800 p-1 text-white'>
-      <div className='flex items-center justify-between'>
+    <nav className=' p-1 text-white'>
+      <div className='flex gap-2 items-center justify-between'>
         <button
           className='text-white text-2xl flex gap-2 items-center cursor-pointer'
           onClick={toggleSidebar}
         >
           &#9776;
-          <div className='text-white text-xl'>H Menu</div>
         </button>
         <div className='hidden md:block'>
           {filteredCategories.map((category: any) => {
