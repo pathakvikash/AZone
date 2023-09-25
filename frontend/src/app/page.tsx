@@ -2,48 +2,47 @@
 import { useEffect, useRef, useState } from 'react';
 import Hero from '@/components/Hero';
 import ProductList from '@/components/product';
-import CircularSlider from '@/components/Sliders/CircularSlider';
-import { Deals, homeDecorImg, homeCleanerImg, mesStyle } from '@/constant';
+import {
+  Deals,
+  homeDecorImg,
+  homeCleanerImg,
+  mesStyle,
+} from '@/utils/constant';
 import Image from 'next/image';
 import { ImageGrid } from '@/components/GridCards/ImageGrid';
-
-const bannerData = [
-  {
-    id: 1,
-    img: 'https://m.media-amazon.com/images/G/31/img21/shoes/2023/AfterPD/Hero/ewd._SX3000_QL85_.jpg',
-    alt: 'Footwear',
-    text: 'Footwear Deal',
-  },
-  {
-    id: 2,
-    img: 'https://m.media-amazon.com/images/G/31/img21/shoes/2023/June/MFD/Herotater/HERO_MEN_WOMEN-2._SX3000_QL85_.jpg',
-    alt: 'Footwear',
-    text: 'Footwear Deal',
-  },
-];
 
 export default function Home() {
   return (
     <div>
       <Hero />
-
-      <div className=' flex justify-around '>
-        <ImageGrid
-          images={homeDecorImg}
-          title='Revamp your home in style'
-          onExploreAll={() => {}}
-        />
-        <ImageGrid
-          images={mesStyle}
-          title='Up to 60% off | Styles for men'
-          onExploreAll={() => {}}
-        />
-        <ImageGrid
-          images={homeCleanerImg}
-          title='Starting ₹99 | All your home improvement needs'
-          onExploreAll={() => {}}
-        />
+      <div className='gap-6 flex flex-col'>
+        <div className='flex flex-col md:flex-row justify-around'>
+          <div className='flex flex-wrap md:flex-row lg:flex gap-6'>
+            <ImageGrid
+              images={homeDecorImg}
+              title='Revamp your home in style'
+              onExploreAll={() => {}}
+            />
+            <ImageGrid
+              images={mesStyle}
+              title='Up to 60% off | Styles for men'
+              onExploreAll={() => {}}
+            />
+            <ImageGrid
+              images={homeCleanerImg}
+              title='Starting ₹99 | All your home improvement needs'
+              onExploreAll={() => {}}
+            />
+            <ImageGrid
+              images={mesStyle}
+              title='Up to 60% off | Styles for men'
+              onExploreAll={() => {}}
+            />
+          </div>
+        </div>
+        <ProductList />
       </div>
+
       <div className='flex items-center overflow-x-auto'>
         {Deals.map((deal, index) => (
           <div key={index} className='flex-shrink-0'>
@@ -58,10 +57,7 @@ export default function Home() {
           </div>
         ))}
       </div>
-      <ProductList />
 
-      <DealsSlider deals={Deals} />
-      <FadeSlider deals={Deals} />
       <ProductGrid products={products} />
     </div>
   );
@@ -69,103 +65,6 @@ export default function Home() {
 
 const myLoader = ({ src }: any) => {
   return `${src}?w=300&h=300&fit=crop&auto=format`;
-};
-
-const DealsSlider = ({ deals }: any) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const sliderRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const autoSlide = setInterval(() => {
-      setActiveIndex((prevIndex) =>
-        prevIndex === deals.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 3000);
-
-    return () => {
-      clearInterval(autoSlide);
-    };
-  }, [deals]);
-
-  const goToSlide = (index: number) => {
-    setActiveIndex(index);
-  };
-
-  return (
-    <div className='DealsSlider relative overflow-hidden'>
-      <div
-        ref={sliderRef}
-        className='w hfull flex transition-transform duration-500'
-        style={{ transform: `translateX(${-activeIndex * 100}%)` }}
-      >
-        {deals.map((deal: any, index: number) => (
-          <div key={index} className='w-full flex-shrink-0'>
-            <img
-              src={deal.imageUrl}
-              alt={deal.name}
-              style={{ objectFit: 'cover' }}
-            />
-          </div>
-        ))}
-      </div>
-      <button
-        onClick={() =>
-          goToSlide(activeIndex === 0 ? deals.length - 1 : activeIndex - 1)
-        }
-        className='absolute left-0 top-1/2 transform -translate-y-1/2 h-12 w-12 bg-white border border-gray-400 rounded-full text-gray-500 font-bold text-lg text-center flex items-center justify-center z-10'
-      >
-        &laquo;
-      </button>
-      <button
-        onClick={() =>
-          goToSlide(activeIndex === deals.length - 1 ? 0 : activeIndex + 1)
-        }
-        className='absolute right-0 top-1/2 transform -translate-y-1/2 h-12 w-12 bg-white border border-gray-400 rounded-full text-gray-500 font-bold text-lg text-center flex items-center justify-center z-10'
-      >
-        &raquo;
-      </button>
-    </div>
-  );
-};
-
-const FadeSlider = ({ deals }: any) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    const autoSlide = setInterval(() => {
-      setActiveIndex((prevIndex) =>
-        prevIndex === deals.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 3000);
-
-    return () => {
-      clearInterval(autoSlide);
-    };
-  }, [deals]);
-
-  return (
-    <div className='DealsSlider relative overflow-hidden'>
-      <div className='flex items-center overflow-x-auto'>
-        {deals.map((deal: any, index: number) => (
-          <div
-            key={index}
-            className={`flex-shrink-0 ${
-              index === activeIndex ? 'opacity-100' : 'opacity-50'
-            } transition-opacity duration-500`}
-          >
-            <Image
-              loader={myLoader}
-              src={deal.imageUrl}
-              alt={deal.name}
-              width={100}
-              height={100}
-              layout='fixed'
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
 };
 
 const products = [

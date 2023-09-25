@@ -6,7 +6,7 @@ import {
 } from '@/store/slices/productSlice';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { baseUrl } from '@/constant';
+import { BASE_URL } from '@/utils/constant';
 import { useSelector } from 'react-redux';
 
 const Product = ({ product }: any) => {
@@ -38,7 +38,7 @@ const ProductList = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch(`${baseUrl}/products`);
+      const response = await fetch(`${BASE_URL}/products`);
       if (response.ok) {
         const productsData = await response.json();
         dispatch(setProductsData(productsData));
@@ -56,7 +56,7 @@ const ProductList = () => {
   }, []);
 
   return (
-    <div className='flex flex-wrap justify-center'>
+    <div className='flex flex-wrap justify-around'>
       {filterProducts?.map((product: any) => (
         <div key={product.id} className='flex w-[350px] h-fit '>
           <Product product={product} />
