@@ -14,11 +14,12 @@ interface Product {
 const ProductDetail: React.FC = () => {
   const pathname = usePathname().split('/').pop();
   const [product, setProduct] = useState<Product | null>(null);
+  const [showRating, setShowRating] = useState(false);
 
   const fetchProductById = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/products/${pathname}`
+        `http://localhost:3001/products/${pathname == '' ? '1' : pathname}`
       );
       if (response.ok) {
         const productData: Product = await response.json();
@@ -59,7 +60,10 @@ const ProductDetail: React.FC = () => {
         <p className='text-blue-900 hover:bg-blue-100'>
           <a href=''>Visit the {product.name.split(' ')[0]} store </a>
         </p>
-        <div className='flex gap-1 text-black'>
+        <div
+          onClick={() => setShowRating(!showRating)}
+          className='flex gap-1 text-black cursor-pointer hover:bg-slate-100'
+        >
           <p className='text-gray-600'>{product.rating}</p>
           {stars} 4000 {'Rating'}
         </div>
@@ -75,13 +79,18 @@ const ProductDetail: React.FC = () => {
           <p className='text-xl text-black'> ₹{product.price}</p>
         </div>
         <hr className='my-4 bg-slate-800' />
+        {showRating && <HoverReview />}
       </div>
-      <ProductSideDetails />
+      <ProductSideDetails product={product} />
     </div>
   );
 };
 
 export default ProductDetail;
+
+interface ProductSideDetailsProps {
+  product: Product;
+}
 
 const HoverReview = () => {
   return (
@@ -140,11 +149,12 @@ const HoverReview = () => {
   );
 };
 
-function ProductSideDetails() {
+const ProductSideDetails: React.FC<ProductSideDetailsProps> = ({ product }) => {
+  const { price } = product;
   return (
     <div className='w-1/4 p-6 border border-gray-300 text-black shadow-md'>
       <div className='flex items-center gap-3'>
-        <p className='text-2xl font-semibold font-sans'>₹1,299</p>
+        <p className='text-2xl font-semibold font-sans'>₹{price}</p>
       </div>
       <p className='text-[#007185]'>
         FREE delivery{' '}
@@ -187,4 +197,4 @@ function ProductSideDetails() {
       </button>
     </div>
   );
-}
+};
