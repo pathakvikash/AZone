@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { baseUrl } from '@/constant';
+import { BASE_URL } from '@/utils/constant';
 
 export function useAppData() {
   const [productsData, setProductsData] = useState([]);
@@ -7,7 +7,7 @@ export function useAppData() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`${baseUrl}/products`);
+        const res = await fetch(`${BASE_URL}/products`);
         const data = await res.json();
         if (data && data[0] && data[0].collections) {
           setProductsData(data[0].collections);
