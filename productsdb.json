@@ -6,6 +6,8 @@
       "name": "Philips Sonicare FlexCare+ Electric Toothbrush",
       "category": "Health & Personal Care",
       "price": "999",
+      "quantity": 1,
+      "productNumber": 1,
       "rating": 3,
       "description": "This electric toothbrush is designed to improve gum health and provides superior cleaning.",
       "image_url": "https://m.media-amazon.com/images/I/61e-yIP-+yL._AC_UL640_FMwebp_QL65_.jpg"
@@ -16,6 +18,8 @@
       "name": "Apple MacBook Air",
       "category": "Electronics",
       "price": "1999",
+      "quantity": 1,
+      "productNumber": 2,
       "rating": 2,
       "description": "The MacBook Air is a lightweight laptop with long battery life and high-resolution Retina display.",
       "image_url": "https://images-na.ssl-images-amazon.com/images/I/71k3fJh5EwL._AC_SX569_.jpg"
@@ -25,6 +29,8 @@
       "brand": "LG",
       "name": "LG OLED TV",
       "category": "Electronics",
+      "quantity": 1,
+      "productNumber": 3,
       "price": "1999",
       "rating": 4,
       "description": "This OLED TV offers stunning picture quality with deep blacks and vibrant colors.",
@@ -36,6 +42,8 @@
       "name": "The Complete Harry Potter Collection Box Set",
       "category": "Books",
       "price": "99",
+      "quantity": 1,
+      "productNumber": 4,
       "rating": 5,
       "description": "The box set includes all seven books in the Harry Potter series, perfect for fans of all ages.",
       "image_url": "https://m.media-amazon.com/images/I/81zqe4fNdlL._AC_UY436_FMwebp_QL65_.jpg"
@@ -46,6 +54,8 @@
       "name": "Instant Pot Pressure Cooker",
       "category": "Home & Kitchen",
       "price": "299",
+      "quantity": 1,
+      "productNumber": 5,
       "rating": 3,
       "description": "This pressure cooker can be used as a slow cooker, rice cooker, steamer, sauté, yogurt maker and warmer.",
       "image_url": "https://m.media-amazon.com/images/I/71FOIBG5f2L._AC_UL640_FMwebp_QL65_.jpg"
@@ -56,6 +66,8 @@
       "name": "Kindle Paperwhite",
       "category": "Electronics",
       "price": "399",
+      "quantity": 1,
+      "productNumber": 6,
       "rating": 4,
       "description": "The Kindle Paperwhite is a waterproof e-reader with a high-resolution display and built-in light.",
       "image_url": "https://m.media-amazon.com/images/I/81-giPjZpSL._AC_UL640_FMwebp_QL65_.jpg"
@@ -66,6 +78,8 @@
       "name": "Sweet and Salty Snack Box",
       "category": "Food & Grocery",
       "price": "599",
+      "quantity": 1,
+      "productNumber": 7,
       "rating": 3,
       "description": "This snack box includes a variety of sweet and salty snacks, perfect for sharing or snacking on the go.",
       "image_url": "https://m.media-amazon.com/images/I/81-giPjZpSL._AC_UL640_FMwebp_QL65_.jpg"
@@ -76,6 +90,8 @@
       "name": "Ninja Professional Countertop Blender",
       "category": "Home & Kitchen",
       "price": "999",
+      "quantity": 1,
+      "productNumber": 8,
       "rating": 5,
       "description": "This powerful blender can be used to make smoothies, sauces, and other blended drinks.",
       "image_url": "https://m.media-amazon.com/images/I/51QiGDcNQnL._AC_UY436_FMwebp_QL65_.jpg"
@@ -86,6 +102,8 @@
       "name": "Fitbit Charge 4 Fitness and Activity Tracker",
       "category": "Electronics",
       "price": "999",
+      "quantity": 1,
+      "productNumber": 9,
       "rating": 5,
       "description": "The Fitbit Charge 4 tracks daily activity and provides insights into sleep and fitness goals.",
       "image_url": "https://images-na.ssl-images-amazon.com/images/I/71smqRr0pmL._AC_SX569_.jpg"
@@ -96,6 +114,8 @@
       "name": "HP Envy x360 Laptop",
       "category": "Electronics",
       "price": "999",
+      "quantity": 1,
+      "productNumber": 10,
       "rating": 5,
       "description": "The HP Envy x360 is a versatile 2-in-1 laptop with a powerful AMD processor.",
       "image_url": "https://m.media-amazon.com/images/I/61t0Of1jvRL._AC_UY436_FMwebp_QL65_.jpg"
@@ -106,6 +126,8 @@
       "name": "Dell XPS 13 Laptop",
       "category": "Electronics",
       "price": "999",
+      "quantity": 1,
+      "productNumber": 11,
       "rating": 3,
       "description": "The Dell XPS 13 is a high-performance laptop with a stunning InfinityEdge display.",
       "image_url": "https://m.media-amazon.com/images/I/61rvR2b3flL._AC_UY436_FMwebp_QL65_.jpg"
@@ -117,6 +139,8 @@
       "category": "Electronics",
       "price": "999",
       "rating": 3,
+      "quantity": 1,
+      "productNumber": 12,
       "description": "Experience immersive VR gaming with the Oculus Rift S VR Glasses.",
       "image_url": "https://images-na.ssl-images-amazon.com/images/I/71URNvzoWqL._AC_SX679_.jpg"
     }
