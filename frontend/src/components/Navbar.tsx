@@ -11,9 +11,8 @@ const Navbar = () => {
   const cart = useSelector((state: any) => state.cart.productsNumber);
   return (
     <div>
-      <header className='min-w-[1000px]'>
-        <div className='flex bg-amazonclone text-white h-[60px]'>
-          {/* Left */}
+      <header className='min-w-[1000px] '>
+        <div className='flex  bg-amazonclone text-white h-[60px]'>
           <div className='flex items-center m-4'>
             <Link href={'/'}>
               <img
@@ -24,16 +23,12 @@ const Navbar = () => {
             </Link>
             <div className='pr-4 pl-4'>
               <div className='text-xs xl:text-sm'>Deliver to</div>
-              <div className='text-sm xl:text-base font-bold'>
-                United Kingdom
-              </div>
+              <div className='text-sm xl:text-base font-bold'>India</div>
             </div>
           </div>
-          {/* Middle */}
           <div className='flex grow relative items-center'>
             <Search />
           </div>
-          {/* Right */}
           <div className='flex items-center m-4'>
             <div className='pr-4 pl-4'>
               <div className='text-xs xl:text-sm'>Hello, sign in</div>
@@ -48,10 +43,10 @@ const Navbar = () => {
             <div className='pr-4 pl-4'>
               <div className='text-xs xl:text-sm'>Filter</div>
               <div className='text-sm xl:text-base font-bold'>
-                <a href='products'>Products</a>
+                <Link href={'/products'}>Products</Link>
               </div>
             </div>
-            <Link href={'/checkout'}>
+            <Link href={'/cart'}>
               <div className='flex pr-3 pl-3'>
                 <ShoppingCartIcon className='h-[48px]' />
                 <div className='relative'>
@@ -64,7 +59,7 @@ const Navbar = () => {
             </Link>
           </div>
         </div>
-        <div className='flex bg-amazonclone-light_blue text-white space-x-3 text-xs xl:text-sm p-2 pl-6'>
+        <div className='flex  bg-amazonclone-light_blue text-white space-x-3 text-xs xl:text-sm p-2 pl-6'>
           <HMenu />
         </div>
       </header>
@@ -114,7 +109,6 @@ const Sidebar: React.FC<{ toggleSidebar: () => void }> = ({
   const [selectedItem, setSelectedItem] = useState<string>('');
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
-  // Define an array to store the text for each item
   const menuItems: { [key: string]: string }[] = [
     {
       label: 'Digital Content & Devices',

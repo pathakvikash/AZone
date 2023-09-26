@@ -1,5 +1,4 @@
 'use client';
-import { useDispatch } from 'react-redux';
 import {
   setProductsData,
   setFilteredProducts,
@@ -7,25 +6,50 @@ import {
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { BASE_URL } from '@/utils/constant';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { FaStar } from 'react-icons/fa';
+import Currency from 'react-currency-formatter';
+
+import { addToCart } from '@/store/slices/cartSlice';
 
 const Product = ({ product }: any) => {
-  const { name, category, price, image_url, rating } = product;
-  const stars = Array.from(Array(rating), (_, index) => (
-    <i key={index} className='fas fa-star'></i>
-  ));
+  const { name, category, price, image_url, rating, description, quantity } =
+    product;
+  const dispatch = useDispatch();
+  const stars = [];
+
+  for (let i = 0; i < product.rating; i++) {
+    stars.push(<FaStar color={'#ffc107'} key={i} />);
+  }
+
+  const addItemToBasket = () => {
+    dispatch(addToCart(product));
+  };
   return (
     <div className='w-full rounded overflow-hidden shadow-lg mx-2 my-2 hover:shadow-2xl transition duration-300 transform hover:scale-105'>
       <img src={image_url} alt={name} className='w-full h-48 object-cover' />
-      <Link href={`/products/${product.id}`}>
-        <div className='px-6 py-4'>
-          <div className='font-bold text-gray-600 text-sm mb-2'>{name}</div>
-          <p className='text-gray-600 text-base mb-2'>{category}</p>
-          <p className='text-gray-700 text-base'>₹{price}</p>
+      <div className='flex p-2 flex-col justify-center items-center'>
+        <Link href={`/products/${product.id}`}>
+          <div className='px-6 py-4 flex-col gap-3 flex '>
+            <div className='font-bold text-gray-600 text-sm '>{name}</div>
+            <p className='text-gray-600 text-base'>{category}</p>
 
-          {stars}
-        </div>
-      </Link>
+            <div className='flex gap-2'>
+              <div className='flex'>{stars}</div>
+            </div>
+            <div className='text-gray-600 text-base'>{description}</div>
+            <p className='text-gray-700 text-base'>
+              <Currency quantity={price} currency='INR' />
+            </p>
+          </div>
+        </Link>
+        <button
+          onClick={addItemToBasket}
+          className='mt-auto p-4 rounded-lg w-full bg-[#f0c14b] button'
+        >
+          Add to Basket
+        </button>
+      </div>
     </div>
   );
 };
