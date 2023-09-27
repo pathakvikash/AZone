@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import { BASE_URL } from '@/utils/constant';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaStar } from 'react-icons/fa';
-import Currency from 'react-currency-formatter';
 
 import { addToCart } from '@/store/slices/cartSlice';
 
@@ -28,7 +27,7 @@ const Product = ({ product }: any) => {
   return (
     <div className='w-full rounded overflow-hidden shadow-lg mx-2 my-2 hover:shadow-2xl transition duration-300 transform hover:scale-105'>
       <img src={image_url} alt={name} className='w-full h-48 object-cover' />
-      <div className='flex p-2 flex-col justify-center items-center'>
+      <div className='flex p-2 flex-col justify-center items-center bg-white'>
         <Link href={`/products/${product.id}`}>
           <div className='px-6 py-4 flex-col gap-3 flex '>
             <div className='font-bold text-gray-600 text-sm '>{name}</div>
@@ -38,9 +37,7 @@ const Product = ({ product }: any) => {
               <div className='flex'>{stars}</div>
             </div>
             <div className='text-gray-600 text-base'>{description}</div>
-            <p className='text-gray-700 text-base'>
-              <Currency quantity={price} currency='INR' />
-            </p>
+            <p className='text-gray-700 text-base'>{'₹' + price}</p>
           </div>
         </Link>
         <button

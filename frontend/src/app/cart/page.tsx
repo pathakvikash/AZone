@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFromCart } from '@/store/slices/cartSlice';
 import { StarIcon } from '@heroicons/react/20/solid';
-import Currency from 'react-currency-formatter';
 import ProductGrid from '@/components/GridCards/ProductGrid';
 import { productsBottom } from '@/utils/constant';
 
@@ -48,23 +47,19 @@ function Cart() {
               <hr className='p-2' />
               <h2 className='whitespace-nowrap font-medium text-black justify-end flex'>
                 Subtotal ({items.length} items):{' '}
-                <span className='font-bold'>
-                  <Currency quantity={cartTotalPrice} currency='USD' />
-                </span>
+                <span className='font-bold'>{'₹' + cartTotalPrice}</span>
               </h2>
             </div>
           </div>
         </div>
 
         {/* Right */}
-        <div className='flex flex-col text-black bg-white p-10 h-min m-5 shadow-md'>
+        <div className='flex min-w-[300px] flex-col text-black bg-white p-10 h-min m-5 shadow-md'>
           {items.length > 0 && (
             <>
               <h2 className='whitespace-nowrap text-[#232F3E]'>
                 Subtotal ({items.length} items):{' '}
-                <span className='font-bold'>
-                  <Currency quantity={cartTotalPrice} currency='USD' />
-                </span>
+                <span className='font-bold'>{'₹' + cartTotalPrice}</span>
               </h2>
               <button
                 className={`button mt-2 ${'from-gray-300 to-gray-500  border-gray-200 text-black pointer-cursor '} rounded-lg p-3 `}
@@ -80,7 +75,6 @@ function Cart() {
           Inspired by your recent orders
         </p>
       </div>
-      <ProductGrid products={productsBottom} />
     </div>
   );
 }
@@ -107,7 +101,7 @@ function CheckoutProduct({
 
   return (
     <div className='grid text-black grid-cols-5'>
-      <Image src={image} alt='' layout='responsive' height={200} width={200} />
+      <Image src={image} alt='' height={200} width={200} />
 
       {/* Middle */}
       <div className='col-span-3  mx-5'>
@@ -116,17 +110,18 @@ function CheckoutProduct({
           {Array(rating).fill(<StarIcon className='h-5 text-yellow-500' />)}
         </div>
         <p className='text-xs my-2 line-clamp-3'>{description}</p>
-        <Currency quantity={price} currency='INR' />
+        {'₹' + price}
         <p className='flex text-black'>Quantity: {quantity}</p>{' '}
         <p>{'In Stock'}</p>
-        <img
-          alt=''
+        <Image
           src='https://m.media-amazon.com/images/G/31/marketing/fba/fba-badge_18px-2x._CB485942108_.png'
-          className='w-30 h-6'
+          alt=''
+          height={90}
+          width={90}
         />
         <div className='flex items-center justify-start gap-2'>
           <input type='checkbox' />
-          <p>This will be a giftThis is a gift</p>
+          <p>This will be a gift</p>
           <a className='text-[#40379f]'>Learn more</a>
         </div>
         <div className='flex gap-2 p-1 justify-start items-center'>

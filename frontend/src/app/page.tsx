@@ -4,7 +4,7 @@ import ProductGrid from '@/components/GridCards/ProductGrid';
 import CarouselCategory from '@/components/Carousel/CarouselCategory';
 import { BASE_URL } from '@/utils/constant';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+
 import {
   Deals,
   gridData,
@@ -83,7 +83,7 @@ const HomePageCard = ({ title, img, link }: any) => {
           alt='Home card'
           width={200}
           height={200}
-          layout='responsive'
+          className='w-auto'
         />
       </div>
       <div className='text-xs xl:text-sm text-blue-400 ml-4'>{link}</div>
