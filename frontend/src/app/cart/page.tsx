@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeFromCart } from '@/store/slices/cartSlice';
 import { StarIcon } from '@heroicons/react/20/solid';
 import Currency from 'react-currency-formatter';
-import { ProductGrid, productsBottom } from '../page';
+import ProductGrid from '@/components/GridCards/ProductGrid';
+import { productsBottom } from '@/utils/constant';
 
 function Cart() {
   const items = useSelector((state: any) => state.cart.products);

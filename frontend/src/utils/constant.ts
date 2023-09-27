@@ -6,6 +6,57 @@ const GB_CURRENCY = Intl.NumberFormat('en-GB', {
   currency: 'GBP',
 });
 
+const productsBottom: any = [
+  {
+    image_url:
+      'https://images-eu.ssl-images-amazon.com/images/I/615Bt2PzCtL._AC_UL320_SR320,320_.jpg',
+    name: 'USB-C to USB-C Cable',
+    price: '19.99',
+    quantity: 1,
+    description: 'description about image',
+  },
+  {
+    image_url:
+      'https://images-eu.ssl-images-amazon.com/images/I/51kEh+wYWLL._AC_UL320_SR320,320_.jpg',
+    name: 'OnePlus Warp Charge Cable',
+    price: '29.99',
+    quantity: 1,
+    description: 'description about image',
+  },
+  {
+    image_url:
+      'https://images-eu.ssl-images-amazon.com/images/I/51+Xck7N4VL._AC_UL320_SR320,320_.jpg',
+    name: 'USB-C to USB-C Cable',
+    price: '19.99',
+    quantity: 1,
+    description: 'description about image',
+  },
+  {
+    image_url:
+      'https://images-eu.ssl-images-amazon.com/images/I/41HYPIrcYQL._AC_UL320_SR320,320_.jpg',
+    name: 'OnePlus Warp Charge Cable',
+    price: '29.99',
+    quantity: 1,
+    description: 'description about image',
+  },
+  {
+    image_url:
+      'https://images-eu.ssl-images-amazon.com/images/I/61T-BidOUgL._AC_UL320_SR320,320_.jpg',
+    name: 'USB-C to USB-C Cable',
+    price: '19.99',
+    quantity: 1,
+    description: 'description about image',
+  },
+  {
+    image_url:
+      'https://images-eu.ssl-images-amazon.com/images/I/615X5v6NsIL._AC_UL320_SR320,320_.jpg',
+    name: 'OnePlus Warp Charge Cable',
+    price: '29.99',
+    quantity: 1,
+    description: 'description about image',
+  },
+];
+
 const Deals = [
   {
     id: 1,
@@ -144,4 +195,5 @@ export {
   homeDecorImg,
   homeCleanerImg,
   mesStyle,
+  productsBottom,
 };
