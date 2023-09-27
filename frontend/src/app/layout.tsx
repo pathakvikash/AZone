@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import AppLayout from '@/components/AppLayout';
 import { store } from '@/store/store';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 type Props = {
   children?: React.ReactNode;
@@ -15,9 +16,11 @@ export default function RootLayout({ children }: { children: Props }) {
   return (
     <html lang='en'>
       <Provider store={store}>
-        <body className={inter.className}>
-          <AppLayout>{children}</AppLayout>
-        </body>
+        <Router>
+          <body className={inter.className}>
+            <AppLayout>{children}</AppLayout>
+          </body>
+        </Router>
       </Provider>
     </html>
   );

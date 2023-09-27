@@ -57,6 +57,40 @@ const productsBottom: any = [
   },
 ];
 
+const bestSellerData = [
+  {
+    img: 'https://m.media-amazon.com/images/I/41cf7cXivDL._AC_SY400_.jpg',
+    title: 'Best Sellers',
+  },
+  {
+    img: 'https://m.media-amazon.com/images/I/41KuRShR97L._AC_SY400_.jpg',
+    title: 'Best Sellers',
+  },
+  {
+    img: 'https://m.media-amazon.com/images/I/61m5Uu4OMJL._AC_SY400_.jpg',
+    title: 'Best Sellers',
+  },
+  {
+    img: 'https://m.media-amazon.com/images/I/71Zf9uUp+GL._AC_SY400_.jpg',
+    title: 'Best Sellers',
+  },
+  {
+    img: 'https://m.media-amazon.com/images/I/61Pg1H7U15L._AC_SY400_.jpg',
+    title: 'Best Sellers',
+  },
+  {
+    img: 'https://m.media-amazon.com/images/I/61rS2NX1vyL._AC_SY400_.jpg',
+    title: 'Best Sellers',
+  },
+  {
+    img: 'https://m.media-amazon.com/images/I/61zroMjd9FL._AC_SY400_.jpg',
+    title: 'Best Sellers',
+  },
+  {
+    img: 'https://m.media-amazon.com/images/I/61ERDR3tATL._AC_SY400_.jpg',
+    title: 'Best Sellers',
+  },
+];
 const Deals = [
   {
     id: 1,
@@ -150,6 +184,24 @@ const homeDecorImg = [
     text: 'Lighting Solutions',
   },
 ];
+const headphonesImg = [
+  {
+    url: 'https://images-eu.ssl-images-amazon.com/images/G/31/img21/MSO/CE/Unrec1/Boat_Desktop_Qc_2x._SY232_CB577919562_.jpg',
+    text: 'Up to 70% off | Boat',
+  },
+  {
+    url: 'https://images-eu.ssl-images-amazon.com/images/G/31/img21/MSO/CE/Unrec1/Boult_Desktop_Qc_2x._SY232_CB577919562_.jpg',
+    text: 'Up to 70% off | Boult',
+  },
+  {
+    url: 'https://images-eu.ssl-images-amazon.com/images/G/31/img21/MSO/CE/Unrec1/Noise_Desktop_Qc_2x._SY232_CB577919562_.jpg',
+    text: 'Up to 70% off | Noise',
+  },
+  {
+    url: 'https://images-eu.ssl-images-amazon.com/images/G/31/img21/MSO/CE/Unrec1/Zebronics_Desktop_Qc_2x._SY232_CB577919562_.jpg',
+    text: 'Up to 70% off | Zebronics',
+  },
+];
 const homeCleanerImg = [
   {
     url: 'https://images-eu.ssl-images-amazon.com/images/G/31/img23/HI/SYED/ATF/QC-adapts_376x232_4._SY232_CB600489960_.jpg',
@@ -187,6 +239,47 @@ const mesStyle = [
   },
 ];
 
+const cricketImg = [
+  {
+    url: 'https://images-eu.ssl-images-amazon.com/images/G/31/Events/img23/Jupiter23/Homepage/PC_QC_TV_2X._SY232_CB578640810_.jpg',
+    text: 'Up to 70% off TVs',
+  },
+  {
+    url: 'https://images-eu.ssl-images-amazon.com/images/G/31/Events/img23/Jupiter23/Homepage/PC_QC_Jersey_2X._SY232_CB578640810_.jpg',
+    text: 'Up to 70% off Jerseys',
+  },
+  {
+    url: 'https://images-eu.ssl-images-amazon.com/images/G/31/Events/img23/Jupiter23/Homepage/PC_QC_Cricket_2X._SY232_CB578640810_.jpg',
+    text: 'Up to 70% off Cricket',
+  },
+  {
+    url: 'https://images-eu.ssl-images-amazon.com/images/G/31/Events/img23/Jupiter23/Homepage/PC_QC_Mob_2X._SY232_CB578640810_.jpg',
+    text: 'Up to 70% off Mobiles',
+  },
+];
+
+const gridData = [
+  {
+    title: 'Up to 70% off | Headphones',
+    url: headphonesImg,
+  },
+  {
+    title: 'Cricket Fever Offers',
+    url: cricketImg,
+  },
+  {
+    title: 'Revamp your home in style',
+    url: homeDecorImg,
+  },
+  {
+    title: 'Up to 60% off | Styles for men',
+    url: mesStyle,
+  },
+  {
+    title: 'All your home improvement needs',
+    url: homeCleanerImg,
+  },
+];
 export {
   BASE_URL,
   GB_CURRENCY,
@@ -196,4 +289,8 @@ export {
   homeCleanerImg,
   mesStyle,
   productsBottom,
+  headphonesImg,
+  cricketImg,
+  bestSellerData,
+  gridData,
 };
