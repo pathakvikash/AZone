@@ -15,7 +15,7 @@ import Image from 'next/image';
 import { ImageGrid } from '@/components/GridCards/ImageGrid';
 import Carousel from '@/components/Carousel/Carousel';
 
-export function Home() {
+const Home: React.FC = () => {
   const homeCards = [
     {
       img: 'https://images-eu.ssl-images-amazon.com/images/G/31/Events/img23/Jupiter23/Homepage/PC_CC_2X._SY608_CB576938243_.jpg',
@@ -30,15 +30,16 @@ export function Home() {
       title: 'Start your day | Fitness Journey',
     },
   ];
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    (async () => {
-      const results = await fetch(`${BASE_URL}/products`).then((response) =>
-        response.json()
-      );
-      setData(results);
-    })();
-  }, []);
+  ``;
+  // const [data, setData] = useState([]);
+  // useEffect(() => {
+  //   (async () => {
+  //     const results = await fetch(`${BASE_URL}/products`).then((response) =>
+  //       response.json()
+  //     );
+  //     setData(results);
+  //   })();
+  // }, []);
 
   return (
     <div className='bg-amazonclone-background'>
@@ -68,7 +69,7 @@ export function Home() {
       <ProductGrid products={productsBottom} />
     </div>
   );
-}
+};
 
 const HomePageCard = ({ title, img, link }: any) => {
   return (

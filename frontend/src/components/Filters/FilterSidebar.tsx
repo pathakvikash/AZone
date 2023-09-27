@@ -7,7 +7,7 @@ import {
   setProductsData,
 } from '@/store/slices/productSlice';
 
-const FilterSidebar = () => {
+const FilterSidebar: React.FC = () => {
   const prices = ['1000', '5000', '10000', '20000'];
 
   return (
