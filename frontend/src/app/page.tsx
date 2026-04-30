@@ -1,9 +1,5 @@
-'use client';
-import ProductList from '@/components/product';
 import ProductGrid from '@/components/GridCards/ProductGrid';
 import CarouselCategory from '@/components/Carousel/CarouselCategory';
-import { BASE_URL } from '@/utils/constant';
-import { useEffect, useState } from 'react';
 
 import {
   Deals,
@@ -15,7 +11,7 @@ import Image from 'next/image';
 import { ImageGrid } from '@/components/GridCards/ImageGrid';
 import Carousel from '@/components/Carousel/Carousel';
 
-const Home: React.FC = () => {
+export default async function Home() {
   const homeCards = [
     {
       img: 'https://images-eu.ssl-images-amazon.com/images/G/31/Events/img23/Jupiter23/Homepage/PC_CC_2X._SY608_CB576938243_.jpg',
@@ -30,28 +26,19 @@ const Home: React.FC = () => {
       title: 'Start your day | Fitness Journey',
     },
   ];
-  ``;
-  // const [data, setData] = useState([]);
-  // useEffect(() => {
-  //   (async () => {
-  //     const results = await fetch(`${BASE_URL}/products`).then((response) =>
-  //       response.json()
-  //     );
-  //     setData(results);
-  //   })();
-  // }, []);
 
   return (
-    <div className='bg-amazonclone-background'>
-      <div className='min-w-[1000px] max-w-[1500px] m-auto'>
+    <div className="bg-background min-h-screen">
+      <div className="w-full mx-auto">
         <Carousel />
-        <div className='grid grid-cols-3 xl:grid-cols-4 -mt-80'>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6 px-2 sm:px-4 -mt-40 sm:-mt-60 relative z-10">
           {homeCards.map((card, index) => (
             <HomePageCard
               key={index}
               img={card.img}
               title={card.title}
-              link='see all offers'
+              link="see all offers"
             />
           ))}
           {gridData.map((data) => (
@@ -59,17 +46,22 @@ const Home: React.FC = () => {
               key={data.title}
               images={data.url}
               title={data.title}
-              onExploreAll={() => {}}
+              href="/products"
             />
           ))}
         </div>
-        <ProductList />
       </div>
-      <CarouselCategory data={bestSellerData} />
-      <ProductGrid products={productsBottom} />
+      
+      <div className="mt-6 sm:mt-8 md:mt-12">
+        <CarouselCategory data={bestSellerData} />
+      </div>
+      
+      <div className="px-2 sm:px-4 pb-6 sm:pb-8">
+        <ProductGrid products={productsBottom} />
+      </div>
     </div>
   );
-};
+}
 
 const HomePageCard = ({ title, img, link }: any) => {
   return (
@@ -80,20 +72,13 @@ const HomePageCard = ({ title, img, link }: any) => {
       <div className='h-[300px] m-4'>
         <Image
           src={img}
-          loader={myLoader}
           alt='Home card'
-          width={200}
-          height={200}
-          className='w-auto'
+          width={400}
+          height={300}
+          className='w-auto h-auto object-contain'
         />
       </div>
       <div className='text-xs xl:text-sm text-blue-400 ml-4'>{link}</div>
     </div>
   );
 };
-
-const myLoader = ({ src }: any) => {
-  return `${src}?w=300&h=300&fit=crop&auto=format`;
-};
-
-export default Home;
