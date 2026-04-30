@@ -1,6 +1,6 @@
 import logo from '../../public/logo.png';
 
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '';
 const GB_CURRENCY = Intl.NumberFormat('en-GB', {
   style: 'currency',
   currency: 'GBP',

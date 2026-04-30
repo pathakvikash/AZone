@@ -6,14 +6,14 @@ export function useAppData() {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!BASE_URL) return;
       try {
-        const res = await fetch(`${BASE_URL}/products`);
+        const res = await fetch(`${BASE_URL}/products`, { cache: 'no-store' });
         const data = await res.json();
         if (data && data[0] && data[0].collections) {
           setProductsData(data[0].collections);
         }
       } catch (error) {
-        console.error('Error fetching product data', error);
       }
     };
 

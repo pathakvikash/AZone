@@ -13,15 +13,20 @@ export const cartSlice = createSlice({
       const addProductExists = state.products.find(
         (product: any) => product.id === action.payload.id
       );
+      const qtyRaw = action.payload?.quantity ?? 1;
+      const qty = Number.isNaN(Number.parseInt(String(qtyRaw)))
+        ? 1
+        : Number.parseInt(String(qtyRaw));
+
       if (addProductExists) {
-        addProductExists.quantity += parseInt(action.payload.quantity);
+        addProductExists.quantity = (addProductExists.quantity || 0) + qty;
       } else {
         state.products.push({
           ...action.payload,
-          quantity: parseInt(action.payload.quantity),
+          quantity: qty,
         });
       }
-      state.productsNumber += parseInt(action.payload.quantity);
+      state.productsNumber = (state.productsNumber || 0) + qty;
     },
     removeFromCart: (state: any, action: any) => {
       // find the product removing the array

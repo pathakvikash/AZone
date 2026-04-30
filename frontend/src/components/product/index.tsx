@@ -4,8 +4,9 @@ import {
   setFilteredProducts,
 } from '@/store/slices/productSlice';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { BASE_URL } from '@/utils/constant';
+import localDB from '../../../../productsdb.json';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaStar } from 'react-icons/fa';
 
@@ -22,7 +23,7 @@ const Product = ({ product }: any) => {
   }
 
   const addItemToBasket = () => {
-    dispatch(addToCart(product));
+    dispatch(addToCart({ ...product, quantity: product?.quantity ?? 1 }));
   };
   return (
     <div className='w-full rounded overflow-hidden shadow-lg mx-2 my-2 hover:shadow-2xl transition duration-300 transform hover:scale-105'>
@@ -58,17 +59,25 @@ const ProductList = () => {
   );
 
   const fetchProducts = async () => {
+    if (!BASE_URL) {
+      const productsData = (localDB as any).products ?? [];
+      dispatch(setProductsData(productsData));
+      dispatch(setFilteredProducts(productsData));
+      return;
+    }
     try {
-      const response = await fetch(`${BASE_URL}/products`);
+      const response = await fetch(`${BASE_URL}/products`, { cache: 'no-store' });
       if (response.ok) {
         const productsData = await response.json();
         dispatch(setProductsData(productsData));
         dispatch(setFilteredProducts(productsData));
-      } else {
-        console.error('Error fetching product data');
+        return;
       }
     } catch (error) {
-      console.error('Error fetching product data', error);
+      // Fall back to local JSON when API unavailable
+      const productsData = (localDB as any).products ?? [];
+      dispatch(setProductsData(productsData));
+      dispatch(setFilteredProducts(productsData));
     }
   };
 
