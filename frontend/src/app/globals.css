@@ -97,35 +97,17 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-primary: #F0F2F3;
-    --color-primary-light: #2B3740;
-    --color-background: #131921;
-    --color-surface: #1A1A1A;
-    --color-text-primary: #F0F2F3;
-    --color-text-secondary: #B0B0B0;
-    --color-text-muted: #888888;
-    --color-border: #333333;
-    --color-border-light: #2A2A2A;
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 /* ============================================
-   BASE STYLES
+   BASE STYLES — dark neon / glass theme
    ============================================ */
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: #e7e9f3;
+  background-color: #07080f;
+  background-image:
+    radial-gradient(900px circle at 8% -10%, rgba(245, 158, 11, 0.12), transparent 45%),
+    radial-gradient(820px circle at 100% 0%, rgba(251, 191, 36, 0.08), transparent 45%),
+    radial-gradient(760px circle at 50% 118%, rgba(249, 115, 22, 0.08), transparent 45%);
+  background-attachment: fixed;
   font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -148,40 +130,64 @@ html {
 @layer components {
   /* Link with hover effect */
   .link {
-    @apply cursor-pointer hover:underline transition-colors duration-150;
+    @apply cursor-pointer text-amber-400 hover:text-amber-300 hover:underline transition-colors duration-150;
   }
-  
-  /* Primary button - Amazon style */
-  .button {
-    @apply px-4 py-2 text-sm bg-gradient-to-b from-yellow-200 to-yellow-400 
-           border border-yellow-300 rounded-sm 
-           focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-1
-           active:from-yellow-500 active:to-yellow-600
-           hover:from-yellow-300 hover:to-yellow-500
-           transition-all duration-150;
+
+  /* ---- Glass surfaces ---- */
+  .glass {
+    @apply bg-white/[0.05] backdrop-blur-xl border border-white/10 rounded-2xl;
   }
-  
-  /* Secondary button */
-  .button-secondary {
-    @apply px-4 py-2 text-sm bg-gradient-to-b from-gray-100 to-gray-200 
-           border border-gray-300 rounded-sm
-           focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-1
-           active:from-gray-300 active:to-gray-400
-           hover:from-gray-200 hover:to-gray-300
-           transition-all duration-150;
+  .glass-strong {
+    @apply bg-white/[0.08] backdrop-blur-2xl border border-white/15 rounded-2xl;
   }
-  
-  /* Card component */
+  .glass-hover {
+    @apply transition-all duration-300 hover:bg-white/[0.09] hover:border-white/25
+           hover:shadow-[0_0_30px_-8px_rgba(245,158,11,0.45)];
+  }
+
+  /* ---- Neon text / borders ---- */
+  .neon-text {
+    @apply bg-gradient-to-r from-yellow-300 via-orange-400 to-amber-500 bg-clip-text text-transparent;
+  }
+  .neon-divider {
+    @apply h-px w-full border-0 bg-gradient-to-r from-transparent via-white/20 to-transparent;
+  }
+
+  /* Primary button - warm gradient pill */
+  .button,
+  .neon-btn {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5
+           text-sm font-semibold text-white
+           bg-gradient-to-r from-yellow-500 via-orange-500 to-amber-600
+           shadow-[0_0_22px_-6px_rgba(245,158,11,0.7)]
+           transition-all duration-200
+           hover:-translate-y-0.5 hover:shadow-[0_0_30px_-2px_rgba(251,191,36,0.65)]
+           active:translate-y-0
+           focus:outline-none focus:ring-2 focus:ring-amber-400/60;
+  }
+
+  /* Secondary / outline button */
+  .button-secondary,
+  .neon-btn-outline {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5
+           text-sm font-semibold text-amber-200
+           border border-amber-400/40 bg-amber-400/[0.06]
+           transition-all duration-200
+           hover:border-amber-300/70 hover:bg-amber-400/[0.12] hover:text-amber-100
+           focus:outline-none focus:ring-2 focus:ring-amber-400/50;
+  }
+
+  /* Card component — glass */
   .card {
-    @apply bg-white rounded-lg shadow-sm border border-gray-100 
-           hover:shadow-md transition-shadow duration-200;
+    @apply glass glass-hover;
   }
-  
-  /* Input field */
+
+  /* Input field — dark glass */
   .input {
-    @apply w-full px-3 py-2 text-sm border border-gray-300 rounded-md
-           focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500
-           placeholder:text-gray-400
+    @apply w-full px-3 py-2 text-sm rounded-lg
+           bg-white/[0.06] border border-white/10 text-white
+           focus:outline-none focus:ring-2 focus:ring-amber-400/60 focus:border-amber-400/60
+           placeholder:text-white/40
            transition-all duration-150;
   }
   

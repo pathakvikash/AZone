@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState = {
   products: [],
@@ -9,7 +9,10 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addToCart: (state: any, action: any): void => {
+    hydrateCart: (_state: any, action: PayloadAction<any>) => {
+      return action.payload;
+    },
+    addToCart: (state: any, action: PayloadAction<any>): void => {
       const addProductExists = state.products.find(
         (product: any) => product.id === action.payload.id
       );
@@ -28,34 +31,31 @@ export const cartSlice = createSlice({
       }
       state.productsNumber = (state.productsNumber || 0) + qty;
     },
-    removeFromCart: (state: any, action: any) => {
-      // find the product removing the array
-      const productToRemove = state.products.find(
-        (product: any) => product.id === action.payload
-      );
-      // remove the quantity from product number
-      state.productsNumber = state.productsNumber - productToRemove.quantity;
-      // find index of the product removing
+    removeFromCart: (state: any, action: PayloadAction<any>) => {
       const index = state.products.findIndex(
         (product: any) => product.id === action.payload
       );
-      // remove from the array
+      if (index === -1) return;
+      state.productsNumber = Math.max(
+        0,
+        state.productsNumber - (state.products[index].quantity || 0)
+      );
       state.products.splice(index, 1);
     },
-    incrementInCart: (state: any, action: any) => {
+    incrementInCart: (state: any, action: PayloadAction<any>) => {
       const itemInc = state.products.find(
         (item: any) => item.id === action.payload
       );
-      if (itemInc.quantity >= 1) {
-        itemInc.quantity = itemInc.quantity + 1;
-      }
+      if (!itemInc) return;
+      itemInc.quantity = (itemInc.quantity || 0) + 1;
       state.productsNumber = state.productsNumber + 1;
     },
-    decrementInCart: (state: any, action: any) => {
+    decrementInCart: (state: any, action: PayloadAction<any>) => {
       const itemDec = state.products.find(
         (item: any) => item.id === action.payload
       );
-      if (itemDec.quantity === 1) {
+      if (!itemDec) return;
+      if (itemDec.quantity <= 1) {
         const index = state.products.findIndex(
           (item: any) => item.id === action.payload
         );
@@ -63,11 +63,16 @@ export const cartSlice = createSlice({
       } else {
         itemDec.quantity--;
       }
-      state.productsNumber = state.productsNumber - 1;
+      state.productsNumber = Math.max(0, state.productsNumber - 1);
     },
   },
 });
 
-export const { addToCart, removeFromCart, incrementInCart, decrementInCart } =
-  cartSlice.actions;
+export const {
+  hydrateCart,
+  addToCart,
+  removeFromCart,
+  incrementInCart,
+  decrementInCart,
+} = cartSlice.actions;
 export default cartSlice.reducer;

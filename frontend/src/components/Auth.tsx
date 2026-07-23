@@ -75,7 +75,7 @@ function Signup() {
     try {
       const accessToken = getAccessToken(); // Get the access token from local storage or session
       const response = await axios.post(
-        'http://localhost:3001/api/signup',
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/signup`,
         {
           username,
           email,

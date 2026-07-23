@@ -1,24 +1,30 @@
-'use client';
 import './globals.css';
 import { Inter } from 'next/font/google';
 import AppLayout from '@/components/AppLayout';
-import { store } from '@/store/store';
-import { Provider } from 'react-redux';
-
-type Props = {
-  children?: React.ReactNode;
-};
+import Providers from '@/components/Providers';
+import { getProducts } from '@/utils/getProducts';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default function RootLayout({ children }: { children: Props }) {
+export const metadata = {
+  title: 'AZone',
+  description: 'AZone — shop everything.',
+};
+
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const products = await getProducts();
+
   return (
     <html lang='en'>
-      <Provider store={store}>
-        <body className={inter.className}>
+      <body className={inter.className}>
+        <Providers initialProducts={products}>
           <AppLayout>{children}</AppLayout>
-        </body>
-      </Provider>
+        </Providers>
+      </body>
     </html>
   );
 }

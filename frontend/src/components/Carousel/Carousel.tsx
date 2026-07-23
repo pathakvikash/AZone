@@ -18,37 +18,44 @@ const Carousel = () => {
     'https://images-eu.ssl-images-amazon.com/images/G/31/img23/Beauty/GW/Skincare-PCmon._CB578343377_.jpg',
   ];
   return (
-    <div className='h-[600px] bg-white w-full'>
-      <Swiper
-        loop={true}
-        spaceBetween={0}
-        navigation={true}
-        modules={[Navigation, Autoplay]}
-        autoplay={{
-          delay: 4500,
-        }}
-        className='h-[50%]'
-      >
-        {images.map((image, index) => (
-          <SwiperSlide key={index}>
-            <Image
-              src={image}
-              alt='Carousel POR'
-              priority
-              className='w-full'
-              width={500}
-              height={500}
-            />
+    <section className='w-full px-2 sm:px-4 pt-4'>
+      <div className='relative overflow-hidden rounded-3xl border border-white/10 shadow-[0_0_70px_-20px_rgba(245,158,11,0.4)]'>
+        <Swiper
+          loop={true}
+          spaceBetween={0}
+          navigation={true}
+          modules={[Navigation, Autoplay]}
+          autoplay={{
+            delay: 4500,
+          }}
+          className='h-[200px] sm:h-[320px] lg:h-[420px]'
+        >
+          {images.map((image, index) => (
+            <SwiperSlide key={image} className='flex items-center justify-center'>
+              <div className='relative mx-auto w-full h-full bg-ink-950'>
+                <Image
+                  src={image}
+                  alt='Carousel banner'
+                  priority={index === 0}
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  sizes='100vw'
+                  fill
+                  className='object-cover object-top'
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+          <SwiperSlide className='bg-black'>
+            <video controls muted preload='none' className='w-full h-full object-cover'>
+              <source src={'/video.mp4'} type='video/mp4' />
+            </video>
           </SwiperSlide>
-        ))}
-        <SwiperSlide className='bg-black'>
-          <video controls muted={true}>
-            <source src={'/video.mp4'} type='video/mp4' />
-          </video>
-        </SwiperSlide>
-      </Swiper>
-      <div className='h-[20%] bg-gradient-to-b from-gray-100 to-transparent bottom-0 z-500' />
-    </div>
+        </Swiper>
+        {/* blend the bright banners into the dark theme */}
+        <div className='pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10 rounded-3xl' />
+        <div className='pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-ink-950/80 to-transparent' />
+      </div>
+    </section>
   );
 };
 

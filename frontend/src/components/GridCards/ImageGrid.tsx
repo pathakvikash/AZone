@@ -9,22 +9,30 @@ type ImageGridProps = {
 };
 
 export const ImageGrid = ({ images, title, href = '/products' }: ImageGridProps) => (
-  <div className='bg-white z-30 m-3 rounded-lg shadow-md p-4 flex flex-col h-auto'>
-    <h3 className='text-xl text-center overflow-hidden whitespace-nowrap overflow-ellipsis font-bold text-black'>
+  <div className='glass glass-hover p-5 flex flex-col h-[420px] group'>
+    <h3 className='text-lg xl:text-xl text-center overflow-hidden whitespace-nowrap overflow-ellipsis font-semibold text-white'>
       {title}
     </h3>
-    <div className='grid grid-cols-2 gap-4 py-4'>
-      {images.map((image: any, index: any) => (
-        <div key={index} className='w-full'>
-          <Image src={image.url} alt={image.text} width={200} height={200} className='w-auto h-auto object-contain mx-auto'/>
-          <p className='mt-2 text-black text-center overflow-hidden whitespace-nowrap overflow-ellipsis'>
+    <div className='grid grid-cols-2 gap-3 py-4 flex-1'>
+      {images.map((image: any) => (
+        <div key={image.url} className='w-full flex flex-col'>
+          <div className='relative w-full flex-1 rounded-lg overflow-hidden bg-white/5'>
+            <Image
+              src={image.url}
+              alt={image.text}
+              fill
+              sizes='(max-width: 768px) 50vw, 200px'
+              className='object-cover transition-transform duration-500 group-hover:scale-105'
+            />
+          </div>
+          <p className='mt-2 text-xs text-white/70 text-center overflow-hidden whitespace-nowrap overflow-ellipsis'>
             {image.text}
           </p>
         </div>
       ))}
     </div>
-    <Link href={href} className='text-xs xl:text-sm text-blue-600 hover:underline mt-auto self-start'>
-      Shop now
+    <Link href={href} className='text-sm font-medium text-amber-400 hover:text-amber-300 mt-auto self-start'>
+      Shop now →
     </Link>
   </div>
 );

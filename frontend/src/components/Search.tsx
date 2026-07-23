@@ -1,106 +1,77 @@
 'use client';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect, useMemo } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import { setFilteredProducts } from '@/store/slices/productSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
-interface SearchState {
-  searchCategory: string;
-  searchText: string;
-}
-
 const Search = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchText, setSearchText] = useState('');
   const [category, setCategory] = useState('All');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const Allproducts = useSelector((state: any) => state.products.productsData);
-
-  const [searchState, setSearchState] = useState<SearchState>({
-    searchCategory: '',
-    searchText: '',
-  });
-
-  const handleSearchTextChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setSearchState({
-      ...searchState,
-      searchText: event.target.value,
-    });
-    handleSearch();
-  };
-  const router = useRouter(); // Use the useRouter hook to access the router object
+  const allProducts = useSelector((state: any) => state.products.productsData);
   const dispatch = useDispatch();
-  const handleSearch = () => {
-    const filterBySearch = Allproducts.filter((product: any) =>
-      product.name.toLowerCase().includes(searchState.searchText.toLowerCase())
-    );
+  const router = useRouter();
+  const pathname = usePathname();
 
-    dispatch(setFilteredProducts(filterBySearch));
-  };
+  const filtered = useMemo(() => {
+    const query = searchText.trim().toLowerCase();
+    return allProducts.filter((product: any) => {
+      const matchesText =
+        query === '' || product.name.toLowerCase().includes(query);
+      const matchesCategory =
+        category === 'All' ||
+        product.category?.toLowerCase() === category.toLowerCase();
+      return matchesText && matchesCategory;
+    });
+  }, [allProducts, searchText, category]);
 
-  const onHandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      dispatch(setFilteredProducts(filtered));
+    }, 250);
+    return () => clearTimeout(timeout);
+  }, [filtered, dispatch]);
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const filterBySearch = Allproducts.filter((product: any) =>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-    dispatch(setFilteredProducts(filterBySearch));
-
-    if (searchTerm.trim() !== '') {
-      router.push(`/search?category=${category}&searchTerm=${searchTerm}`);
-    }
-
-    setSearchTerm('');
-    setCategory('All');
-  };
-
-  const handleSearchCategoryChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const selectedCategory = event.target.value;
-    setSearchState((prevState) => ({
-      ...prevState,
-      searchCategory: selectedCategory,
-    }));
+    dispatch(setFilteredProducts(filtered));
+    if (pathname !== '/products') router.push('/products');
   };
 
   return (
-    <div className='w-[100%]'>
-      <div className='flex items-center h-10 bg-amazonclone-yellow rounded'>
+    <form onSubmit={onSubmit} className='w-full'>
+      <div className='flex items-center h-11 rounded-full bg-white/[0.06] backdrop-blur-xl border border-white/15 overflow-hidden focus-within:border-amber-400/60 focus-within:ring-2 focus-within:ring-amber-400/30 transition-all'>
         <select
-          onChange={(e) => handleSearchCategoryChange(e)}
-          value={searchState.searchCategory || 'All'}
-          className='p-2 bg-gray-300 text-black border text-xs xl:text-sm'
+          onChange={(e) => setCategory(e.target.value)}
+          value={category}
+          className='h-full pl-3 pr-2 bg-transparent text-white/80 text-xs xl:text-sm border-r border-white/10 focus:outline-none cursor-pointer [&>option]:text-black'
         >
-          <option>All</option>
-          <option>Deals</option>
+          <option value='All'>All</option>
           <option value='electronics'>Electronics</option>
           <option value='clothing'>Clothing</option>
           <option value='books'>Books</option>
-          <option>Amazon</option>
-          <option>Fashion</option>
-          <option>Computers</option>
-          <option>Home</option>
-          <option>Mobiles</option>
+          <option value='Mobiles'>Mobiles</option>
+          <option value='Computers'>Computers</option>
+          <option value='Home'>Home</option>
+          <option value='Fashion'>Fashion</option>
         </select>
         <input
           type='text'
           placeholder='Search for something'
-          className='flex-grow items-center h-[100%] rounded-l text-black'
-          value={searchState.searchText}
-          onChange={handleSearchTextChange}
+          aria-label='Search products'
+          className='flex-grow h-full px-3 bg-transparent text-white placeholder:text-white/40 focus:outline-none'
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
         />
-        <button onClick={() => onHandleSubmit} className='w-[45px]'>
-          <MagnifyingGlassIcon className='h-[27px] m-auto stroke-slate-900' />
+        <button
+          type='submit'
+          aria-label='Search'
+          className='h-full w-12 flex items-center justify-center bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-400 hover:to-orange-400 transition-all'
+        >
+          <MagnifyingGlassIcon className='h-6 w-6 stroke-white' />
         </button>
       </div>
-      {loading && <div>Loading...</div>}
-      {/* {error && <div>Error: {error.message}</div>} */}
-    </div>
+    </form>
   );
 };
 

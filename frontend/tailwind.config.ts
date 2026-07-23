@@ -114,6 +114,23 @@ const config: Config = {
         },
         background: '#EAEDED',
         surface: '#FFFFFF',
+        // Dark "ink" surfaces for the neon/glass theme
+        ink: {
+          DEFAULT: '#07080f',
+          950: '#07080f',
+          900: '#0b0d17',
+          800: '#10131f',
+          700: '#161a2b',
+          600: '#1c2236',
+        },
+        // Neon accents
+        neon: {
+          violet: '#8b5cf6',
+          fuchsia: '#d946ef',
+          cyan: '#22d3ee',
+          blue: '#3b82f6',
+          pink: '#ec4899',
+        },
         // State colors
         error: {
           DEFAULT: '#CC0000',
@@ -183,6 +200,8 @@ const config: Config = {
         'slide-out-left': 'slideOutLeft 0.3s ease-in',
         'slide-in-up': 'slideInUp 0.3s ease-out',
         'slide-out-down': 'slideOutDown 0.3s ease-in',
+        'glow-pulse': 'glowPulse 4s ease-in-out infinite',
+        'float-slow': 'floatSlow 7s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -212,6 +231,14 @@ const config: Config = {
         slideOutDown: {
           '0%': { transform: 'translateY(0)' },
           '100%': { transform: 'translateY(100%)' },
+        },
+        glowPulse: {
+          '0%, 100%': { opacity: '0.5' },
+          '50%': { opacity: '1' },
+        },
+        floatSlow: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-8px)' },
         },
       },
     },

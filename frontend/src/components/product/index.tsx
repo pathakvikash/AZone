@@ -1,96 +1,80 @@
 'use client';
-import {
-  setProductsData,
-  setFilteredProducts,
-} from '@/store/slices/productSlice';
 import Link from 'next/link';
-import { useEffect } from 'react';
-import { BASE_URL } from '@/utils/constant';
-import localDB from '../../../../productsdb.json';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaStar } from 'react-icons/fa';
 
 import { addToCart } from '@/store/slices/cartSlice';
 
 const Product = ({ product }: any) => {
-  const { name, category, price, image_url, rating, description, quantity } =
-    product;
+  const { name, category, price, image_url, description } = product;
   const dispatch = useDispatch();
   const stars = [];
 
   for (let i = 0; i < product.rating; i++) {
-    stars.push(<FaStar color={'#ffc107'} key={i} />);
+    stars.push(<FaStar color={'#fbbf24'} key={i} />);
   }
 
   const addItemToBasket = () => {
     dispatch(addToCart({ ...product, quantity: product?.quantity ?? 1 }));
   };
   return (
-    <div className='w-full rounded overflow-hidden shadow-lg mx-2 my-2 hover:shadow-2xl transition duration-300 transform hover:scale-105'>
-      <img src={image_url} alt={name} className='w-full h-48 object-cover' />
-      <div className='flex p-2 flex-col justify-center items-center bg-white'>
-        <Link href={`/products/${product.id}`}>
-          <div className='px-6 py-4 flex-col gap-3 flex '>
-            <div className='font-bold text-gray-600 text-sm '>{name}</div>
-            <p className='text-gray-600 text-base'>{category}</p>
-
-            <div className='flex gap-2'>
-              <div className='flex'>{stars}</div>
-            </div>
-            <div className='text-gray-600 text-base'>{description}</div>
-            <p className='text-gray-700 text-base'>{'₹' + price}</p>
-          </div>
-        </Link>
-        <button
-          onClick={addItemToBasket}
-          className='mt-auto p-4 rounded-lg w-full bg-[#f0c14b] button'
-        >
-          Add to Basket
-        </button>
-      </div>
+    <div className='glass glass-hover w-full flex flex-col overflow-hidden group'>
+      <Link href={`/products/${product.id}`} className='flex flex-col flex-grow'>
+        <div className='relative w-full h-48 bg-white/5 rounded-t-2xl overflow-hidden'>
+          <Image
+            src={image_url}
+            alt={name}
+            fill
+            sizes='(max-width: 768px) 100vw, 350px'
+            className='object-contain transition-transform duration-500 group-hover:scale-105'
+          />
+        </div>
+        <div className='p-4 flex-col gap-2 flex flex-grow'>
+          <div className='font-semibold text-white text-sm line-clamp-2'>{name}</div>
+          <p className='text-amber-400/80 text-xs uppercase tracking-wide'>{category}</p>
+          <div className='flex gap-0.5'>{stars}</div>
+          <div className='text-white/60 text-sm line-clamp-2'>{description}</div>
+          <p className='text-amber-400 text-lg font-bold mt-auto'>{'₹' + price}</p>
+        </div>
+      </Link>
+      <button
+        onClick={addItemToBasket}
+        className='neon-btn m-4 mt-0'
+      >
+        Add to Basket
+      </button>
     </div>
   );
 };
 
-const ProductList = () => {
-  const dispatch = useDispatch();
+const ProductList = ({ initialProducts = [] }: { initialProducts?: any[] }) => {
+  const [mounted, setMounted] = useState(false);
   const filterProducts = useSelector(
     (state: any) => state.products.filteredProducts
   );
 
-  const fetchProducts = async () => {
-    if (!BASE_URL) {
-      const productsData = (localDB as any).products ?? [];
-      dispatch(setProductsData(productsData));
-      dispatch(setFilteredProducts(productsData));
-      return;
-    }
-    try {
-      const response = await fetch(`${BASE_URL}/products`, { cache: 'no-store' });
-      if (response.ok) {
-        const productsData = await response.json();
-        dispatch(setProductsData(productsData));
-        dispatch(setFilteredProducts(productsData));
-        return;
-      }
-    } catch (error) {
-      // Fall back to local JSON when API unavailable
-      const productsData = (localDB as any).products ?? [];
-      dispatch(setProductsData(productsData));
-      dispatch(setFilteredProducts(productsData));
-    }
-  };
-
   useEffect(() => {
-    fetchProducts();
+    setMounted(true);
   }, []);
 
+  // Server + first paint render the server-provided list (SSR content);
+  // after mount we read the store so search/filters (seeded in Providers) drive it.
+  const display = mounted ? filterProducts : initialProducts;
+
+  if (mounted && !display?.length) {
+    return (
+      <div className='flex-grow flex items-center justify-center py-20 text-white/50'>
+        No products match your filters.
+      </div>
+    );
+  }
+
   return (
-    <div className='flex flex-wrap justify-around'>
-      {filterProducts?.map((product: any) => (
-        <div key={product.id} className='flex w-[350px] h-fit '>
-          <Product product={product} />
-        </div>
+    <div className='grid flex-grow gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+      {display.map((product: any) => (
+        <Product key={product.id} product={product} />
       ))}
     </div>
   );
